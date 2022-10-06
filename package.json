@@ -2,8 +2,9 @@
   "name": "glitch-node-mysql",
   "version": "1.0.0",
   "description": "A test project of node with mysql on glitch.com",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
