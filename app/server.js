@@ -9,6 +9,6 @@ app.get('/', (req, res) => {
 })
 
 app.listen(process_env.PORT, () => {
-    console.log('express is running at http://127.0.0.1')
+    console.log('express is running at ' + process_env.PROJECT_DOMAIN)
     console.log('process.env.test_key : ' + process_env.test_key)
 })
