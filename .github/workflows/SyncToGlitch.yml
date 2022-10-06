@@ -12,6 +12,6 @@ jobs:
     - name: Sync to Glitch Project
       uses: kanadgupta/glitch-sync@main
       with:
-        project-id: '${{ secrets.projectId }}' # glitch process_env.PROJECT_ID
-        auth-token: '${{ secrets.authToken }}' # glitch process_env.PROJECT_INVITE_TOKEN
+        project-id: '${{ secrets.PROJECT_ID }}' # glitch process_env.PROJECT_ID
+        auth-token: '${{ secrets.PROJECT_INVITE_TOKEN }}' # glitch process_env.PROJECT_INVITE_TOKEN
         path: 'app'
