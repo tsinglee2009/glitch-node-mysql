@@ -1,11 +1,11 @@
 const process_env = require('./glitch/process_env')
 const express = require('express')
-const db = require('./database')
+const db = require('./js/database')
 
 var app = express()
 
 app.get('/', (req, res) => {
-    res.send('2022/10/06 22:53:00 ' + process_env.test_key)
+    res.send('Hello Glitch')
 })
 
 app.listen(process_env.PORT, () => {
