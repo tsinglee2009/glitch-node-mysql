@@ -13,5 +13,5 @@ jobs:
       uses: kanadgupta/glitch-sync@main
       with:
         project-id: '${{ secrets.PROJECT_ID }}' # glitch process_env.PROJECT_ID
-        auth-token: '${{ secrets.IMPORT_AUTHORIZATION }}' # glitch import 'Authorization' request header
+        auth-token: '${{ secrets.IMPORT_AUTHORIZATION }}' # glitch import request header's 'Authorization' value
         path: 'app'

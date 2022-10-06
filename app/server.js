@@ -5,7 +5,7 @@ const db = require('./database')
 var app = express()
 
 app.get('/', (req, res) => {
-    res.send(process_env.test_key)
+    res.send('2022/10/06 22:53:00 ' + process_env.test_key)
 })
 
 app.listen(process_env.PORT, () => {
