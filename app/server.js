@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
     res.send(process_env.test_key)
 })
 
-app.listen(80, () => {
+app.listen(process_env.PORT, () => {
     console.log('express is running at http://127.0.0.1')
     console.log('process.env.test_key : ' + process_env.test_key)
 })

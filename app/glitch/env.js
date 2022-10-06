@@ -4,7 +4,7 @@
     desc  : The .env file is for storing secrets for your app, like an API key. 
             Any project member can see the contents in the same way that you can, 
             and everyone else can just see the variable names.
-    link  : https://help.glitch.com/kb/article/18-adding-private-data/
+    link  : https://glitch.happyfox.com/kb/section/25/
     usage : process.env.[variable_name]
     eg    : process.env.test_key
 
