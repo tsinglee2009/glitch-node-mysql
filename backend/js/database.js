@@ -1,5 +1,5 @@
-var mysql = require('mysql')
 const process_env = require('../glitch/process_env')
+const mysql = require('mysql')
 
 // db connect config
 var connection = mysql.createConnection({
