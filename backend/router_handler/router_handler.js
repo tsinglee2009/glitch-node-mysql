@@ -1,5 +1,7 @@
-const reguser = require('./user/reguser')
-const login = require('./user/login')
+// user
+const reguser = require('./reguser')
+const login = require('./login')
+//
 
 module.exports = {
     reguser,

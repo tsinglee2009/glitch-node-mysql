@@ -1,6 +1,7 @@
 const process_env = require('./glitch/process_env')
 const database = require('./js/database')
 const express = require('express')
+const joi = require('joi')
 
 var app = express()
 
@@ -20,6 +21,10 @@ app.use((req, res, next) => {
     next()
 })
 
+// 中间件：解析token 身份认证
+var expressjwt = require("express-jwt")
+app.use(expressjwt({ secret: process_env.jwtKey }).unless({ path: [/^\/api\//]}))
+
 // 导入并使用路由：user
 const router_user = require('./router/router')
 app.use('/api', router_user)
@@ -29,6 +34,21 @@ app.get('/', (req, res) => {
     res.send('Hello Glitch')
 })
 
+// 异常处理
+app.use((err, req, res, next) => {
+    // 验证失败导致的错误
+    if (err instanceof joi.ValidationError) {
+        return res.cc(err)
+    }
+    // token 身份认证失败的错误
+    if (err.name === 'UnauthorizedError') {
+        return res.cc('身份认证失败')
+    }
+    // 未知的错误
+    res.cc(err)
+})
+
+// 启动服务器
 app.listen(process_env.PORT, () => {
     console.log('express is running at ' + process_env.PROJECT_DOMAIN)
     console.log('process.env.test_key : ' + process_env.test_key)

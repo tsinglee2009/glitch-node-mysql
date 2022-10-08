@@ -5,8 +5,6 @@
             Any project member can see the contents in the same way that you can, 
             and everyone else can just see the variable names.
     link  : https://glitch.happyfox.com/kb/section/25/
-    usage : process.env.[variable_name]
-    eg    : process.env.test_key
 
     sample code :
     
@@ -17,6 +15,8 @@
 
     module.exports = env
     ```
+
+    usage : process.env.test_key
 */
 
 //
