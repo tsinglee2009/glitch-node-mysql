@@ -1,6 +1,6 @@
-const db = require('../js/database')
+const db = require('../../js/database')
+const env = require('../../glitch/process_env')
 const bcrypt = require('bcryptjs')
-const env = require('../glitch/process_env')
 const jwt = require('jsonwebtoken')
 
 // 用户登录

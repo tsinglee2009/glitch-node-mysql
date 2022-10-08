@@ -1,4 +1,4 @@
-const db = require('../js/database')
+const db = require('../../js/database')
 const bcrypt = require('bcryptjs')
 
 // 注册用户

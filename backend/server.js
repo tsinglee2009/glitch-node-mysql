@@ -27,7 +27,7 @@ app.use(expressjwt({ secret: process_env.jwtKey }).unless({ path: [/^\/api\//]})
 
 // 导入并使用路由：user
 const router_user = require('./router/router')
-app.use('/api', router_user)
+app.use(router_user)
 
 // 默认路由
 app.get('/', (req, res) => {
