@@ -1,5 +1,6 @@
 const process_env = require('../glitch/process_env')
 const mysql = require('mysql')
+const fs = require('fs')
 
 // db connect config
 var connection = mysql.createConnection({
@@ -10,9 +11,18 @@ var connection = mysql.createConnection({
 });
 
 // db tables config
+const table_names = [ 'ev_users', 'ev_article_cates', 'ev_articles' ]
+
 var tablesMap = new Map()
-// tablesMap.set('users', 'CREATE TABLE IF NOT EXISTS ? (id INT(11), name VARCHAR(16));')
-// tablesMap.set('test_1', 'CREATE TABLE IF NOT EXISTS ? (id INT(12), name2 VARCHAR(20));')
+table_names.forEach(item => {
+  var sql = ``
+  try {
+    sql = fs.readFileSync(`./sql/${item}.sql`, { encoding: 'utf8' })
+  } catch(e) {
+    throw e
+  }
+  tablesMap.set(item, sql)
+});
 
 // connect database
 connection.connect((err) => {
@@ -22,9 +32,8 @@ connection.connect((err) => {
   }
   console.log('db connected as id ' + connection.threadId);
 
-  // // clear tables
-  // connection.query('drop table users')
-  // connection.query('drop table test_1')
+  // !!! TEST : clean tables
+  // table_names.forEach(item => connection.query(`DROP TABLE IF EXISTS ` + item))
 
   // show all db tables
   connection.query('SHOW TABLES', (err, results) => {
@@ -42,13 +51,10 @@ function create_table_itr(itr) {
 
   var item = itr.next().value
 
-  if (item) {
+  if (!item) {
     
-    var table = item[0]
-    var sql = item[1].replace('?', table)
-    console.log('- check table : ' + table + ' | ' + sql)
-
-    connection.query(sql, (err, results) => {
+    console.log('- check table : ' + item[0])
+    connection.query(item[1], (err, results) => {
         if (err) {
           console.log('error when create table : ' + table)
           return console.log(err)

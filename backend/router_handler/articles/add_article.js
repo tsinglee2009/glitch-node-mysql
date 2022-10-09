@@ -13,7 +13,7 @@ module.exports = (req, res) => {
     res.cc_pre_fn = () => fs.unlinkSync(req.file.path)
 
     // 检查文章分类
-    const sql_check = `select * from ev_article_cate where is_delete=0 and id=?`
+    const sql_check = `select * from ev_article_cates where is_delete=0 and id=?`
     db.query(sql_check, req.body.cate_id, (err, results) => {
         // sql err
         if (err) return res.cc(err)

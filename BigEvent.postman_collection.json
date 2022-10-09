@@ -1,0 +1,805 @@
+{
+	"info": {
+		"_postman_id": "7bd80c67-bd0c-4a62-97a1-70206c5a3586",
+		"name": "BigEvent",
+		"description": "## **黑马大事件项目**\n\nB站视频：[https://www.bilibili.com/video/BV1a34y167AZ/?p=77](https://www.bilibili.com/video/BV1a34y167AZ/?p=77)\n\n接口文档：[https://www.showdoc.com.cn/escook/3707158761215217](https://www.showdoc.com.cn/escook/3707158761215217)\n\n### 说明\n\n\\* 以 **/api** 开头的请求路径，不需要访问权限  \n\\* 以 **/my** 开头的请求路径，需要 Authorization 身份验证",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23763939"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "regUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/api/reguser",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"reguser"
+							]
+						},
+						"description": "### 用户注册接口"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/api/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						},
+						"description": "### 用户登录接口"
+					},
+					"response": []
+				}
+			],
+			"description": "## 用户注册登录",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "my",
+			"item": [
+				{
+					"name": "getUserinfo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/my/userinfo",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"my",
+								"userinfo"
+							]
+						},
+						"description": "### 获取用户的基本信息"
+					},
+					"response": []
+				},
+				{
+					"name": "updateUserinfo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "nickname",
+									"value": "hh33",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "13333@3.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/my/userinfo",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"my",
+								"userinfo"
+							]
+						},
+						"description": "### 更新用户的基本信息"
+					},
+					"response": []
+				},
+				{
+					"name": "updatePwd",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "oldPwd",
+									"value": "111111",
+									"type": "text"
+								},
+								{
+									"key": "newPwd",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/my/updatepwd",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"my",
+								"updatepwd"
+							]
+						},
+						"description": "### 重置密码"
+					},
+					"response": []
+				},
+				{
+					"name": "updateAvatar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "avatar",
+									"value": "data:image/png;base64,VE9PTUFO1VNFQ1JFVFM=",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/my/update/avatar",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"my",
+								"update",
+								"avatar"
+							]
+						},
+						"description": "### 更换头像"
+					},
+					"response": []
+				}
+			],
+			"description": "## 个人中心",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJhZG1pbiIsInBhc3N3b3JkIjoiIiwibmlja25hbWUiOm51bGwsImVtYWlsIjpudWxsLCJ1c2VyX3BpYyI6IiIsImlhdCI6MTY2NTI5NzQ2MSwiZXhwIjoxNjY1MzMzNDYxfQ.CBIOtHY2ZWdTr5rltL1aXiG2EP0mOmGL75l-OJpf_nE",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "cates",
+			"item": [
+				{
+					"name": "getCateList",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1/my/article/cates",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"my",
+								"article",
+								"cates"
+							]
+						},
+						"description": "### 获取文章分类列表"
+					},
+					"response": []
+				},
+				{
+					"name": "addCate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "文化",
+									"type": "text"
+								},
+								{
+									"key": "alias",
+									"value": "wenhua",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/my/article/addcates",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"my",
+								"article",
+								"addcates"
+							]
+						},
+						"description": "### 新增文章分类"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1/my/article/deletecate/7",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"my",
+								"article",
+								"deletecate",
+								"7"
+							]
+						},
+						"description": "## 根据 Id 删除文章分类"
+					},
+					"response": []
+				},
+				{
+					"name": "getCate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1/my/article/cates/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"my",
+								"article",
+								"cates",
+								"3"
+							]
+						},
+						"description": "### 根据 Id 获取文章分类数据"
+					},
+					"response": []
+				},
+				{
+					"name": "updateCate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "旅游",
+									"type": "text"
+								},
+								{
+									"key": "alias",
+									"value": "lvyou",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/my/article/updatecate",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"my",
+								"article",
+								"updatecate"
+							]
+						},
+						"description": "### 根据 Id 更新文章分类数据"
+					},
+					"response": []
+				}
+			],
+			"description": "## 文章分类管理",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJhZG1pbiIsInBhc3N3b3JkIjoiIiwibmlja25hbWUiOm51bGwsImVtYWlsIjpudWxsLCJ1c2VyX3BpYyI6IiIsImlhdCI6MTY2NTI5NzQ2MSwiZXhwIjoxNjY1MzMzNDYxfQ.CBIOtHY2ZWdTr5rltL1aXiG2EP0mOmGL75l-OJpf_nE",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "articles",
+			"item": [
+				{
+					"name": "getArticleList",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "pagesize",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "pagenum",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "cate_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "草稿",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/my/article/list",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"my",
+								"article",
+								"list"
+							]
+						},
+						"description": "### 获取文章的列表数据"
+					},
+					"response": []
+				},
+				{
+					"name": "addArticle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "article",
+									"type": "text"
+								},
+								{
+									"key": "cate_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Unity游戏设计与实现 南梦宫一线程序员的开发实例",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "草稿",
+									"type": "text"
+								},
+								{
+									"key": "cover_img",
+									"type": "file",
+									"src": "/Users/lee/Desktop/截屏2022-08-29 15.46.19.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/my/article/add",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"my",
+								"article",
+								"add"
+							]
+						},
+						"description": "### 发布新文章"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteArticle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/my/article/delete/9",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"my",
+								"article",
+								"delete",
+								"9"
+							]
+						},
+						"description": "### 根据 Id 删除文章数据"
+					},
+					"response": []
+				},
+				{
+					"name": "getArticle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/my/article/8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"my",
+								"article",
+								"8"
+							]
+						},
+						"description": "### 根据 Id 获取文章详情"
+					},
+					"response": []
+				},
+				{
+					"name": "updateArticle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Id",
+									"value": "8",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "article_8",
+									"type": "text"
+								},
+								{
+									"key": "cate_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "article_8_contents",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "草稿",
+									"type": "text"
+								},
+								{
+									"key": "cover_img",
+									"type": "file",
+									"src": "/Users/lee/Desktop/截屏2022-08-29 14.35.54.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/my/article/edit",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"my",
+								"article",
+								"edit"
+							]
+						},
+						"description": "### 根据 Id 更新文章信息"
+					},
+					"response": []
+				}
+			],
+			"description": "## 文章管理",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJhZG1pbiIsInBhc3N3b3JkIjoiIiwibmlja25hbWUiOm51bGwsImVtYWlsIjpudWxsLCJ1c2VyX3BpYyI6IiIsImlhdCI6MTY2NTI5NzQ2MSwiZXhwIjoxNjY1MzMzNDYxfQ.CBIOtHY2ZWdTr5rltL1aXiG2EP0mOmGL75l-OJpf_nE",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "public",
+			"item": [
+				{
+					"name": "/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "## 管理后台首页",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}

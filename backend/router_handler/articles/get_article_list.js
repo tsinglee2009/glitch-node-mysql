@@ -55,7 +55,7 @@ module.exports = (req, res) => {
                 sql_filter += ` and ${types}`
             }
 
-            const sql_check = `select id,name from ev_article_cate ${sql_filter}`
+            const sql_check = `select id,name from ev_article_cates ${sql_filter}`
             db.query(sql_check, (err, results) => {
                 // sql err 
                 if (err) return res.cc(err)

@@ -4,7 +4,7 @@ const db = require('../../js/database')
 module.exports = (req, res) => {
 
     // 删除文章分类至数据库
-    const sql_update = `update ev_article_cate set is_delete=1 where id=?`
+    const sql_update = `update ev_article_cates set is_delete=1 where id=?`
     db.query(sql_update, req.params.id , (err, results) => {
         
         if (err) return res.cc(err)

@@ -3,7 +3,7 @@ const db = require('../../js/database')
 // 根据id获取文章分类
 module.exports = (req, res) => {
     
-    const sql_check = `select * from ev_article_cate where id=?`
+    const sql_check = `select * from ev_article_cates where id=?`
     db.query(sql_check, req.params.id, (err, results) => {
         
         if (err) return res.cc(err)
