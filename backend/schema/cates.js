@@ -4,7 +4,7 @@ const joi = require('joi')
 const name = joi.string().required()
 const alias = joi.string().alphanum().required()
 
-exports.article_cate_schema = {
+exports.add_cate_schema = {
     // 表示需要对 req.body 中的数据进行验证
     body : {
         name,
