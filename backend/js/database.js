@@ -51,15 +51,14 @@ function create_table_itr(itr) {
 
   var item = itr.next().value
 
-  if (!item) {
-    
-    console.log('- check table : ' + item[0])
+  if (item) {
+    // console.log('- check table : ' + item[0])
     connection.query(item[1], (err, results) => {
         if (err) {
           console.log('error when create table : ' + table)
           return console.log(err)
         }
-        
+        //
         create_table_itr(itr)
     });
   }
