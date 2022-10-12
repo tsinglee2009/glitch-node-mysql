@@ -17,27 +17,27 @@
     <nav class="ev-com-navbar navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="./index.html">
               <img class="ev-icon-brand" alt="Brand" src="./images/logo.png">
             </a>
           </div>
-          <div class="navbar-right ev-mode-default">
-            <button type="button" class="btn btn-default navbar-btn ev-no-border">Sign in</button>
-            <button type="button" class="btn btn-default navbar-btn">Sign up</button>
+          <div class="navbar-right ev-mode-default hide" id="ev-mode-default">
+            <a href="./login.html?act=signin" class="btn btn-default navbar-btn ev-no-border">Sign in</a>
+            <a href="./login.html?act=signup" class="btn btn-default navbar-btn">Sign up</a>
           </div>
-          <div class="navbar-right ev-mode-user">
+          <div class="navbar-right ev-mode-user hide" id="ev-mode-user">
             <div class="dropdown">
                 <button type="button" class="btn btn-default navbar-btn dropdown-toggle ev-no-border" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="ev-ico-user" src="./favicon.ico" alt=""><span class="caret"></span>
+                    <img id="ev-ico-user-avatar" class="ev-ico-user" src="./favicon.ico" alt=""><span class="caret"></span>
                   </button>
                 <ul class="dropdown-menu">
-                  <li><a href="">Signed in as<br>lee_09</a></li>
+                  <li><a id="dropdown-name-item" href="./dashboard.html?act=userinfo">Signed in as<br>lee_09</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="#">Your profile</a></li>
-                  <li><a href="#">Your articles</a></li>
-                  <li><a href="#">New article</a></li>
+                  <li><a href="./dashboard.html#userinfo">Your profile</a></li>
+                  <li><a href="./dashboard.html#articles">Your articles</a></li>
+                  <li><a href="./editor.html">New article</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="#">Sign out</a></li>
+                  <li><a id="dropdown-signout-item" href="#">Sign out</a></li>
                 </ul>
             </div>
           </div>
@@ -80,5 +80,8 @@
     <script src="./libs/jquery-3.6.1.min.js"></script>
     <!-- bootstrap -->
     <script src="./libs/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+    <!--  -->
+    <script src="./js/common.js"></script>
+    <script src="./js/index.js"></script>
 </body>
 </html>

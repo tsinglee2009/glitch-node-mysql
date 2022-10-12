@@ -75,6 +75,12 @@ body {
   border-radius: 4px;
   padding: 2px 4px;
 }
+.ev-center .ev-container .ev-contents .ev-field .ev-create-cates {
+  margin-bottom: 10px;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-create-cates input {
+  margin-right: 20px;
+}
 .ev-center .ev-container .ev-contents .ev-field .ev-table {
   width: 100%;
   border: 1px solid #999;
@@ -94,6 +100,20 @@ body {
 }
 .ev-center .ev-container .ev-contents .ev-field .ev-table .ev-td-operations .ev-button {
   margin: 0 6px;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-cates-tr-editor td span {
+  display: inline-block;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-cates-tr-editor td input {
+  display: none;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-cates-tr-editor.edit > td span {
+  display: none;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-cates-tr-editor.edit > td input {
+  display: inline-block;
+  border: 1px solid #999;
+  border-radius: 4px;
 }
 .ev-center .ev-container .ev-contents .ev-field .ev-filter-articles {
   display: flex;

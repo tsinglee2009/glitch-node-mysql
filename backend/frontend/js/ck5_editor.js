@@ -134,9 +134,7 @@ CKEDITOR.ClassicEditor.create(document.getElementById("ev-ck5-editor"),
     ]
 }
 ).then(editor => {
-    // get input
-    document.querySelector('#btn_send').addEventListener('click', (e) => {
-        var result = editor.getData()
-        console.log(result)
-    })
+
+    CKEDITOR.ClassicEditor.ev_instance = editor
+    
 });

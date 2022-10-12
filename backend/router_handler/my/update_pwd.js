@@ -25,7 +25,7 @@ module.exports = (req, res) => {
             if (results.affectedRows !== 1) {
                 return res.cc('重置密码失败，请稍后再试！')
             }
-            res.cc('重置密码成功！')
+            res.cc('重置密码成功！', 0)
         })
     })
 }

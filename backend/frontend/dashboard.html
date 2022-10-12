@@ -16,27 +16,27 @@
     <nav class="ev-com-navbar navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="./index.html">
               <img class="ev-icon-brand" alt="Brand" src="./images/logo.png">
             </a>
           </div>
-          <div class="navbar-right ev-mode-default">
-            <button type="button" class="btn btn-default navbar-btn ev-no-border">Sign in</button>
-            <button type="button" class="btn btn-default navbar-btn">Sign up</button>
+          <div class="navbar-right ev-mode-default hide" id="ev-mode-default">
+            <a href="./login.html?act=signin" class="btn btn-default navbar-btn ev-no-border">Sign in</a>
+            <a href="./login.html?act=signup" class="btn btn-default navbar-btn">Sign up</a>
           </div>
-          <div class="navbar-right ev-mode-user">
+          <div class="navbar-right ev-mode-user hide" id="ev-mode-user">
             <div class="dropdown">
                 <button type="button" class="btn btn-default navbar-btn dropdown-toggle ev-no-border" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="ev-ico-user" src="./favicon.ico" alt=""><span class="caret"></span>
                   </button>
                 <ul class="dropdown-menu">
-                  <li><a href="">Signed in as<br>lee_09</a></li>
+                  <li><a id="dropdown-name-item" href="./dashboard.html?act=userinfo">Signed in as<br>lee_09</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="#">Your profile</a></li>
-                  <li><a href="#">Your articles</a></li>
-                  <li><a href="#">New article</a></li>
+                  <li><a href="./dashboard.html#userinfo">Your profile</a></li>
+                  <li><a href="./dashboard.html#articles">Your articles</a></li>
+                  <li><a href="./editor.html">New article</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="#">Sign out</a></li>
+                  <li><a id="dropdown-signout-item" href="#">Sign out</a></li>
                 </ul>
             </div>
           </div>
@@ -44,56 +44,51 @@
     </nav>
     <div class="ev-center">
         <div class="container">
-            <div class="ev-container">
+            <div id="ev-resizable" class="ev-container">
                 <div class="ev-menus">
                     <ul>
-                        <li><a href="">
-                            回到首页
-                        </a></li>
                         <li>
-                            <a href="">文章管理</a>
+                            <a href="javascript:;">个人中心</a>
                             <ul>
                                 <li>
-                                    <a class="ev-sub-item focus" href="">文章类别</a>
+                                    <a id="ev-sub-item-userinfo" class="ev-sub-item" href="">基本资料</a>
                                 </li>
                                 <li>
-                                    <a class="ev-sub-item" href="">文章列表</a>
+                                    <a id="ev-sub-item-avatar" class="ev-sub-item" href="">更换头像</a>
+                                </li>
+                                <li>
+                                    <a id="ev-sub-item-password" class="ev-sub-item" href="">重置密码</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="">个人中心</a>
+                            <a href="javascript:;">文章管理</a>
                             <ul>
                                 <li>
-                                    <a class="ev-sub-item" href="">基本资料</a>
+                                    <a id="ev-sub-item-cates" class="ev-sub-item" href="">文章类别</a>
                                 </li>
                                 <li>
-                                    <a class="ev-sub-item" href="">更换头像</a>
-                                </li>
-                                <li>
-                                    <a class="ev-sub-item" href="">重置密码</a>
+                                    <a id="ev-sub-item-articles" class="ev-sub-item" href="">文章列表</a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
                 <div class="ev-contents">
-                    <div class="ev-field ev-field-cates">
+                    <div id="ev-field-cates" class="ev-field ev-field-cates">
                         <div class="ev-title">文章类别管理</div>
+                        <form id="ev-form-add-cates" class="ev-create-cates">
+                            <span>新增类别：</span><input name="name" class="ev-input" type="text">
+                            别名：</span><input name="alias" class="ev-input" type="text">
+                            <button id="ev-btn-add-cate" class="btn btn-default ev-button">新增</button>
+                        </form>
                         <table class="ev-table">
                             <thead>
                                 <th>文章类别</th>
                                 <th>文章别名</th>
                                 <th>操作</th>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input class="ev-input" type="text"></td>
-                                    <td><input class="ev-input" type="text"></td>
-                                    <td>
-                                        <button class="btn btn-default ev-button">新增</button>
-                                    </td>
-                                </tr>
+                            <tbody id="ev-cates-container">
                                 <tr>
                                     <td>时尚</td>
                                     <td>shishang</td>
@@ -110,7 +105,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="ev-field ev-field-articles">
+                    <div id="ev-field-articles" class="ev-field ev-field-articles">
                         <div class="ev-title">文章列表</div>
                         <div class="ev-filter ev-filter-articles">
                             <div class="ev-filter-cates dropdown">
@@ -166,28 +161,28 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="ev-field ev-field-userinfo">
+                    <div id="ev-field-userinfo" class="ev-field ev-field-userinfo">
                         <div class="ev-title">修改用户信息</div>
-                        <form action="" class="ev-form">
-                            <div class="ev-input-field">
+                        <form id="ev-form-userinfo" action="" class="ev-form">
+                            <!-- <div class="ev-input-field">
                                 <span class="ev-input-title">用户名称</span>
-                                <input type="text" class="ev-input">
-                            </div>
+                                <input id="username" type="text" class="ev-input">
+                            </div> -->
                             <div class="ev-input-field">
                                 <span class="ev-input-title">用户昵称</span>
-                                <input type="text" class="ev-input">
+                                <input id="ipt-nickname" name="nickname" type="text" class="ev-input">
                             </div>
                             <div class="ev-input-field">
                                 <span class="ev-input-title">用户邮箱</span>
-                                <input type="text" class="ev-input">
+                                <input name="email" type="text" class="ev-input">
                             </div>
                             <div class="ev-btns-field">
-                                <button class="btn btn-default ev-button">提交修改</button>
-                                <button class="btn btn-default ev-button">重置</button>
+                                <button id="ev-btn-update-userinfo" class="btn btn-default ev-button">提交修改</button>
+                                <button class="btn btn-default ev-button" type="reset">重置</button>
                             </div>
                         </form>
                     </div>
-                    <div class="ev-field ev-field-avatar active">
+                    <div id="ev-field-avatar" class="ev-field ev-field-avatar">
                         <div class="ev-title">更换头像</div>
                         <div class="ev-avatar">
                             <!-- 图片裁剪框 start -->
@@ -199,24 +194,24 @@
                         </div>
                         <button class="btn btn-default ev-button">确定</button>
                     </div>
-                    <div class="ev-field ev-field-password">
+                    <div id="ev-field-password" class="ev-field ev-field-password">
                         <div class="ev-title">重置密码</div>
-                        <form action="" class="ev-form">
+                        <form id="ev-form-pwd" action="" class="ev-form">
                             <div class="ev-input-field">
                                 <span class="ev-input-title">原密码</span>
-                                <input type="text" class="ev-input">
+                                <input name="oldPwd" type="text" class="ev-input">
                             </div>
                             <div class="ev-input-field">
                                 <span class="ev-input-title">新密码</span>
-                                <input type="text" class="ev-input">
+                                <input id="ev-newPwd" name="newPwd" type="text" class="ev-input">
                             </div>
                             <div class="ev-input-field">
                                 <span class="ev-input-title">确认新密码</span>
-                                <input type="text" class="ev-input">
+                                <input id="ev-confirmPwd" type="text" class="ev-input">
                             </div>
                             <div class="ev-btns-field">
-                                <button class="btn btn-default ev-button">修改密码</button>
-                                <button class="btn btn-default ev-button">重置</button>
+                                <button id="ev-btn-edit-pwd" class="btn btn-default ev-button">修改密码</button>
+                                <button class="btn btn-default ev-button" type="reset">重置</button>
                             </div>
                         </form>
                     </div>
@@ -230,6 +225,22 @@
             <p>@ BigEvent 2022</p>
         </div>
     </div>
+    <!-- template -->
+    <script type="text/html" id="ev-tpl-cates">
+        {{each data}}
+        <tr class="ev-cates-tr-editor">
+            <td><span>{{$value.name}}</span><input type="text"></td>
+            <td><span>{{$value.alias}}</span><input type="text"></td>
+            <td class="ev-td-operations" data-cate-id={{$value.id}}>
+                <button class="btn btn-default ev-button ev-btn-cate-edit">编辑</button>
+                <button class="btn btn-default ev-button ev-btn-cate-del">删除</button>
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+    <script type="text/html" id="ev-tpl-articles">
+
+    </script>
     <!-- jquery -->
     <script src="./libs/jquery-3.6.1.min.js"></script>
     <!-- bootstrap -->
@@ -237,25 +248,10 @@
     <!-- cropper -->
     <script src="./libs/cropper-1.5.12-dist/cropper.min.js"></script>
     <script src="./libs/cropper-1.5.12-dist/jquery-cropper.min.js"></script>
-    <!-- cropper test -->
-    <script>
-        var $image = $('#ev-avatar-image');
-
-        $image.cropper({
-            aspectRatio: 16 / 9,
-            crop: function(event) {
-                console.log(event.detail.x);
-                console.log(event.detail.y);
-                console.log(event.detail.width);
-                console.log(event.detail.height);
-                console.log(event.detail.rotate);
-                console.log(event.detail.scaleX);
-                console.log(event.detail.scaleY);
-            }
-        });
-
-        // Get the Cropper.js instance after initialized
-        var cropper = $image.data('cropper');
-    </script>
+    <!-- art-template -->
+    <script src="./libs/art-template-4.13.2.min.js"></script>
+    <!--  -->
+    <script src="./js/common.js"></script>
+    <script src="./js/dashboard.js"></script>
 </body>
 </html>

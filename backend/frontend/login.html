@@ -14,17 +14,17 @@
     <div class="ev-center ev-signup hide">
         <div class="ev-color-inverted-logo"></div>
         <h2 class="ev-title">Register as a User</h2>
-        <form class="ev-form ev-form-signup ev-border-style" action="">
+        <form id="ev-form-signup" class="ev-form ev-form-signup ev-border-style" action="">
             <div class="ev-form-group ev-username">
                 <h4>Username</h4>
-                <input id="username" class=" ev-border-style" type="text">
+                <input name="username" class=" ev-border-style" type="text">
             </div>
             <div class="ev-form-group ev-password">
                 <h4>Password</h4>
-                <input id="password" class=" ev-border-style" type="password">
+                <input name="password" class=" ev-border-style" type="password">
             </div>
             <div class="ev-sign ev-signup">
-                <button type="submit">Sign up</button>
+                <button id="ev-btn-signup" type="submit">Sign up</button>
             </div>
         </form>
         <div class="ev-hint ev-border-style">
@@ -36,17 +36,17 @@
     <div class="ev-center ev-signin ">
         <div class="ev-color-inverted-logo"></div>
         <h2 class="ev-title">Sign in to BigEvent</h2>
-        <form class="ev-form ev-form-signin ev-border-style" action="">
+        <form id="ev-form-signin" class="ev-form ev-form-signin ev-border-style" action="">
             <div class="ev-form-group ev-username">
                 <h4>Username</h4>
-                <input id="username" class=" ev-border-style" type="text">
+                <input id="username" name="username" class=" ev-border-style" type="text">
             </div>
             <div class="ev-form-group ev-password">
                 <h4>Password</h4>
-                <input id="password" class=" ev-border-style" type="password">
+                <input name="password" class=" ev-border-style" type="password">
             </div>
             <div class="ev-sign ev-signin">
-                <button type="submit">Sign in</button>
+                <button id="ev-btn-signin" type="submit">Sign in</button>
             </div>
         </form>
         <div class="ev-hint ev-border-style">
@@ -60,5 +60,9 @@
             <p>@ BigEvent 2022</p>
         </div>
     </div>
+
+    <!-- scripts -->
+    <script src="./libs/jquery-3.6.1.min.js"></script>
+    <script src="./js/login.js"></script>
 </body>
 </html>
