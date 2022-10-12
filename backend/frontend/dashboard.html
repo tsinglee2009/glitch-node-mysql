@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./libs/bootstrap-3.4.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./libs/cropper-1.5.12-dist/cropper.min.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+</head>
+<body>
+    <!-- 通用导航条 -->
+    <nav class="ev-com-navbar navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+              <img class="ev-icon-brand" alt="Brand" src="./images/logo.png">
+            </a>
+          </div>
+          <div class="navbar-right ev-mode-default">
+            <button type="button" class="btn btn-default navbar-btn ev-no-border">Sign in</button>
+            <button type="button" class="btn btn-default navbar-btn">Sign up</button>
+          </div>
+          <div class="navbar-right ev-mode-user">
+            <div class="dropdown">
+                <button type="button" class="btn btn-default navbar-btn dropdown-toggle ev-no-border" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="ev-ico-user" src="./favicon.ico" alt=""><span class="caret"></span>
+                  </button>
+                <ul class="dropdown-menu">
+                  <li><a href="">Signed in as<br>lee_09</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Your profile</a></li>
+                  <li><a href="#">Your articles</a></li>
+                  <li><a href="#">New article</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Sign out</a></li>
+                </ul>
+            </div>
+          </div>
+        </div>
+    </nav>
+    <div class="ev-center">
+        <div class="container">
+            <div class="ev-container">
+                <div class="ev-menus">
+                    <ul>
+                        <li><a href="">
+                            回到首页
+                        </a></li>
+                        <li>
+                            <a href="">文章管理</a>
+                            <ul>
+                                <li>
+                                    <a class="ev-sub-item focus" href="">文章类别</a>
+                                </li>
+                                <li>
+                                    <a class="ev-sub-item" href="">文章列表</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="">个人中心</a>
+                            <ul>
+                                <li>
+                                    <a class="ev-sub-item" href="">基本资料</a>
+                                </li>
+                                <li>
+                                    <a class="ev-sub-item" href="">更换头像</a>
+                                </li>
+                                <li>
+                                    <a class="ev-sub-item" href="">重置密码</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ev-contents">
+                    <div class="ev-field ev-field-cates">
+                        <div class="ev-title">文章类别管理</div>
+                        <table class="ev-table">
+                            <thead>
+                                <th>文章类别</th>
+                                <th>文章别名</th>
+                                <th>操作</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input class="ev-input" type="text"></td>
+                                    <td><input class="ev-input" type="text"></td>
+                                    <td>
+                                        <button class="btn btn-default ev-button">新增</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>时尚</td>
+                                    <td>shishang</td>
+                                    <td class="ev-td-operations">
+                                        <button class="btn btn-default ev-button">编辑</button>
+                                        <button class="btn btn-default ev-button">删除</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="ev-field ev-field-articles">
+                        <div class="ev-title">文章列表</div>
+                        <div class="ev-filter ev-filter-articles">
+                            <div class="ev-filter-cates dropdown">
+                                <button type="button" class="btn btn-default ev-button navbar-btn dropdown-toggle ev-no-border" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    所有分类&nbsp;<span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                <li><a href="#">分类1</a></li>
+                                <li><a href="#">分类2</a></li>
+                                <li><a href="#">分类3</a></li>
+                                </ul>
+                            </div>
+                            <div class="ev-filter-states dropdown">
+                                <button type="button" class="btn btn-default ev-button navbar-btn dropdown-toggle ev-no-border" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    所有状态&nbsp;<span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                <li><a href="#">草稿</a></li>
+                                <li><a href="#">已发布</a></li>
+                                </ul>
+                            </div>
+                            <button class="btn btn-default ev-button">筛选</button>
+                        </div>
+                        <table class="ev-table">
+                            <thead>
+                                <th>文章标题</th>
+                                <th>分类</th>
+                                <th>发表时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>文章标题1</td>
+                                    <td>分类1</td>
+                                    <td>2022/10/10 10:10:10</td>
+                                    <td>草稿</td>
+                                    <td class="ev-td-operations">
+                                        <button class="btn btn-default ev-button">编辑</button>
+                                        <button class="btn btn-default ev-button">删除</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>文章标题1</td>
+                                    <td>分类1</td>
+                                    <td>2022/10/10 10:10:10</td>
+                                    <td>草稿</td>
+                                    <td class="ev-td-operations">
+                                        <button class="btn btn-default ev-button">编辑</button>
+                                        <button class="btn btn-default ev-button">删除</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="ev-field ev-field-userinfo">
+                        <div class="ev-title">修改用户信息</div>
+                        <form action="" class="ev-form">
+                            <div class="ev-input-field">
+                                <span class="ev-input-title">用户名称</span>
+                                <input type="text" class="ev-input">
+                            </div>
+                            <div class="ev-input-field">
+                                <span class="ev-input-title">用户昵称</span>
+                                <input type="text" class="ev-input">
+                            </div>
+                            <div class="ev-input-field">
+                                <span class="ev-input-title">用户邮箱</span>
+                                <input type="text" class="ev-input">
+                            </div>
+                            <div class="ev-btns-field">
+                                <button class="btn btn-default ev-button">提交修改</button>
+                                <button class="btn btn-default ev-button">重置</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="ev-field ev-field-avatar active">
+                        <div class="ev-title">更换头像</div>
+                        <div class="ev-avatar">
+                            <!-- 图片裁剪框 start -->
+                            <div class="ev-avatar-container">
+                                <img id="ev-avatar-image" src="./images/logo.png">
+                            </div>
+                            <!-- 图片裁剪框 end -->
+                            <input class="ev-avartar-file" type="file">
+                        </div>
+                        <button class="btn btn-default ev-button">确定</button>
+                    </div>
+                    <div class="ev-field ev-field-password">
+                        <div class="ev-title">重置密码</div>
+                        <form action="" class="ev-form">
+                            <div class="ev-input-field">
+                                <span class="ev-input-title">原密码</span>
+                                <input type="text" class="ev-input">
+                            </div>
+                            <div class="ev-input-field">
+                                <span class="ev-input-title">新密码</span>
+                                <input type="text" class="ev-input">
+                            </div>
+                            <div class="ev-input-field">
+                                <span class="ev-input-title">确认新密码</span>
+                                <input type="text" class="ev-input">
+                            </div>
+                            <div class="ev-btns-field">
+                                <button class="btn btn-default ev-button">修改密码</button>
+                                <button class="btn btn-default ev-button">重置</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 通用底部 -->
+    <div class="ev-com-footer">
+        <div class="container">
+            <p>@ BigEvent 2022</p>
+        </div>
+    </div>
+    <!-- jquery -->
+    <script src="./libs/jquery-3.6.1.min.js"></script>
+    <!-- bootstrap -->
+    <script src="./libs/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+    <!-- cropper -->
+    <script src="./libs/cropper-1.5.12-dist/cropper.min.js"></script>
+    <script src="./libs/cropper-1.5.12-dist/jquery-cropper.min.js"></script>
+    <!-- cropper test -->
+    <script>
+        var $image = $('#ev-avatar-image');
+
+        $image.cropper({
+            aspectRatio: 16 / 9,
+            crop: function(event) {
+                console.log(event.detail.x);
+                console.log(event.detail.y);
+                console.log(event.detail.width);
+                console.log(event.detail.height);
+                console.log(event.detail.rotate);
+                console.log(event.detail.scaleX);
+                console.log(event.detail.scaleY);
+            }
+        });
+
+        // Get the Cropper.js instance after initialized
+        var cropper = $image.data('cropper');
+    </script>
+</body>
+</html>

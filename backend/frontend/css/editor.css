@@ -1,0 +1,110 @@
+.ev-center .container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px 4px #eee;
+}
+.ev-center .container .ev-editor {
+  margin: 10px;
+  padding: 10px 0;
+}
+.ev-center .container .ev-editor .ev-editor-head {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin: 10px 0;
+}
+.ev-center .container .ev-editor .ev-editor-head h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 26px;
+  font-weight: 400;
+  margin-right: 20px;
+}
+.ev-center .container .ev-editor .ev-editor-head .ev-editor-input {
+  flex: 1;
+  margin-right: 20px;
+}
+.ev-center .container .ev-editor .ev-editor-head .ev-editor-input input {
+  display: block;
+  height: 40px;
+  width: 100%;
+  padding: 0 10px;
+  font-size: 24px;
+  border-radius: 4px;
+  border-width: 1px;
+}
+.ev-center .container .ev-editor .ev-editor-head .ev-editor-input input::placeholder {
+  font-size: 22px;
+  color: #eee;
+}
+.ev-center .container .ev-editor .ev-editor-head .ev-editor-input input:focus {
+  border: 1px solid hsl(218, 81.8%, 56.9%);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1) inset;
+  outline: none;
+}
+.ev-center .container .ev-editor .ev-editor-head .ev-btn-editor {
+  height: 40px;
+  margin-left: 10px;
+  padding: 0 16px;
+  background-color: transparent;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+.ev-center .container .ev-editor .ev-editor-body .ck-editor__editable[role="textbox"] {
+  /* editing area */
+  min-height: 600px;
+}
+.ev-center .container .ev-editor .ev-editor-body .ck-content .image {
+  /* block images */
+  max-width: 80%;
+  margin: 20px auto;
+}
+.ev-modal-field .ev-submit-article-field .ev-modal-title {
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+}
+.ev-modal-field .ev-submit-article-field .ev-modal-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 1px dashed #e5e5e5;
+  border-radius: 6px;
+}
+.ev-modal-field .ev-submit-article-field .ev-modal-cover .ev-modal-cover-img {
+  display: none;
+  max-height: 160px;
+  max-width: 80%;
+}
+.ev-modal-field .ev-submit-article-field .ev-modal-cover .ev-modal-cover-picker {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 64px;
+  color: #e5e5e5;
+  cursor: pointer;
+}
+.ev-modal-field .ev-submit-article-field .ev-modal-cover.ev-modal-img-picked {
+  border-style: solid;
+}
+.ev-modal-field .ev-submit-article-field .ev-modal-cover.ev-modal-img-picked .ev-modal-cover-picker {
+  display: none;
+}
+.ev-modal-field .ev-submit-article-field .ev-modal-cates {
+  margin-left: 10px;
+}
+.ev-modal-field .ev-submit-article-field .ev-modal-new-cates label {
+  margin-right: 10px;
+}
+.ev-modal-field .ev-submit-article-field .ev-modal-new-cates input {
+  margin-left: 6px;
+  margin-right: 16px;
+  border-radius: 4px;
+  border: 1px solid #999;
+  padding: 0 4px;
+  height: 26px;
+  width: 80px;
+}

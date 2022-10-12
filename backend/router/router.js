@@ -10,7 +10,7 @@ const expressJoi = require('@escook/express-joi')
 const { user_schema, pwd_schema, avatar_schema } = require('../schema/user')
 const { userinfo_schema } = require('../schema/my')
 const { add_cate_schema, delete_cate_schema, update_cate_schema } = require('../schema/cates')
-const { add_article_schema, get_articles_schema, update_article_schema } = require('../schema/articles')
+const { add_article_schema, get_articles_schema, update_article_schema, pub_get_articles_schema } = require('../schema/articles')
 
 // 路由列表
 
@@ -34,6 +34,9 @@ router.post('/my/article/add', expressJoi(add_article_schema), handler.addArticl
 router.get('/my/article/delete/:id', handler.deleteArticle) // 根据id删除文章
 router.get('/my/article/:id', handler.getArticle) // 根据id获取文章信息
 router.post('/my/article/edit', expressJoi(update_article_schema), handler.updateArticle) // 根据id更新文章信息
+// public 游客模式
+router.get('/pub/article/list', expressJoi(pub_get_articles_schema), handler.pubGetArticles) // 游客 获取文章列表
+router.get('/pub/article/:id', handler.pubGetArticle) // 游客 根据id获取文章信息
 
 // 导出路由列表
 module.exports = router

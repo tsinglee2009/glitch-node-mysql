@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册和登录</title>
+    <link rel="stylesheet" href="./libs/bootstrap-3.4.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <!-- 注册 -->
+    <div class="ev-center ev-signup hide">
+        <div class="ev-color-inverted-logo"></div>
+        <h2 class="ev-title">Register as a User</h2>
+        <form class="ev-form ev-form-signup ev-border-style" action="">
+            <div class="ev-form-group ev-username">
+                <h4>Username</h4>
+                <input id="username" class=" ev-border-style" type="text">
+            </div>
+            <div class="ev-form-group ev-password">
+                <h4>Password</h4>
+                <input id="password" class=" ev-border-style" type="password">
+            </div>
+            <div class="ev-sign ev-signup">
+                <button type="submit">Sign up</button>
+            </div>
+        </form>
+        <div class="ev-hint ev-border-style">
+            <span>Have an account? <a href="./login.html?act=signin">Goto sign in.</a></span>
+        </div>
+    </div>
+
+    <!-- 登录 -->
+    <div class="ev-center ev-signin ">
+        <div class="ev-color-inverted-logo"></div>
+        <h2 class="ev-title">Sign in to BigEvent</h2>
+        <form class="ev-form ev-form-signin ev-border-style" action="">
+            <div class="ev-form-group ev-username">
+                <h4>Username</h4>
+                <input id="username" class=" ev-border-style" type="text">
+            </div>
+            <div class="ev-form-group ev-password">
+                <h4>Password</h4>
+                <input id="password" class=" ev-border-style" type="password">
+            </div>
+            <div class="ev-sign ev-signin">
+                <button type="submit">Sign in</button>
+            </div>
+        </form>
+        <div class="ev-hint ev-border-style">
+            <span>New to BigEvent? <a href="./login.html?act=signup">Create an account.</a></span>
+        </div>
+    </div>
+
+    <!-- 通用底部 -->
+    <div class="ev-com-footer">
+        <div class="container">
+            <p>@ BigEvent 2022</p>
+        </div>
+    </div>
+</body>
+</html>

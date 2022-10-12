@@ -41,3 +41,12 @@ exports.update_article_schema = {
         state
     }
 }
+
+// 游客模式
+exports.pub_get_articles_schema = {
+    body : {
+        pagesize,
+        pagenum,
+        op_cate_id,
+    }
+}

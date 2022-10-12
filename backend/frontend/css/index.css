@@ -1,0 +1,76 @@
+.ev-center .container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.ev-center .container .ev-article-list .ev-article-item {
+  height: 120px;
+  padding: 10px 30px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.ev-center .container .ev-article-list .ev-article-item .ev-article-cover {
+  display: flex;
+  justify-content: space-around;
+  margin-right: 20px;
+  width: 150px;
+}
+.ev-center .container .ev-article-list .ev-article-item .ev-article-cover .ev-article-cover-img {
+  max-height: 100px;
+  max-width: 100%;
+}
+.ev-center .container .ev-article-list .ev-article-item .ev-article-info .ev-article-title {
+  height: 40px;
+}
+.ev-center .container .ev-article-list .ev-article-item .ev-article-info .ev-article-footer {
+  font-size: 14px;
+}
+.ev-center .container .ev-article-list .ev-article-item .ev-article-info .ev-article-footer span {
+  margin-right: 10px;
+}
+.ev-center .container .ev-article-list .ev-article-item:hover {
+  background-color: rgba(250, 250, 250, 0.98);
+  box-shadow: 0 2px 2px 2px #eee;
+}
+.ev-center .container .ev-article-list-end {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #eee;
+  cursor: default;
+}
+.ev-center .container .ev-article-list-end .ev-article-list-end-line {
+  height: 1px;
+  width: 30%;
+  background-color: #eee;
+}
+.ev-center .ev-shortcuts {
+  position: fixed;
+  z-index: 99;
+  right: 100px;
+  bottom: 200px;
+}
+.ev-center .ev-shortcuts .ev-shortcut-top {
+  display: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  color: #1f2228;
+  border: 2px solid #1f2228;
+  background-color: #fff;
+  text-align: center;
+  line-height: 50px;
+  font-size: 16px;
+  text-decoration: none;
+}
+@media (max-width: 768px) {
+  .ev-article-cover {
+    width: 90px !important;
+  }
+  .ev-article-footer {
+    font-size: 12px !important;
+  }
+}

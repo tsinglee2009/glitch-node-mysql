@@ -1,0 +1,133 @@
+body {
+  background-color: #fff;
+}
+.ev-center {
+  background-color: #f4f7f9;
+}
+.ev-center .ev-container {
+  display: flex;
+  width: 100%;
+  min-height: 800px;
+  background-color: #fff;
+}
+.ev-center .ev-container .ev-menus {
+  width: 160px;
+  padding: 10px;
+}
+.ev-center .ev-container .ev-menus li a {
+  display: block;
+  width: 100%;
+  padding-left: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 30px;
+  color: #555;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+.ev-center .ev-container .ev-menus li a:hover {
+  background-color: #eef0f3;
+  border: 1px solid transparent;
+  border-radius: 6px;
+}
+.ev-center .ev-container .ev-menus li .ev-sub-item {
+  position: relative;
+  padding-left: 30px;
+  font-size: 12px;
+}
+.ev-center .ev-container .ev-menus li .ev-sub-item.focus {
+  background-color: #eef0f3;
+  border: 1px solid transparent;
+  border-radius: 6px;
+}
+.ev-center .ev-container .ev-menus li .ev-sub-item.focus::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 7%;
+  left: -10px;
+  width: 4px;
+  height: 86%;
+  background-color: #005ed0;
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+.ev-center .ev-container .ev-contents {
+  flex: 1;
+  padding: 15px 30px;
+  background-color: #fff;
+}
+.ev-center .ev-container .ev-contents .ev-field {
+  display: none;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-title {
+  margin-bottom: 14px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-button {
+  padding: 2px 6px;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-input {
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-table {
+  width: 100%;
+  border: 1px solid #999;
+  border-radius: 4px;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-table th,
+.ev-center .ev-container .ev-contents .ev-field .ev-table td {
+  border: 1px solid #999;
+  padding: 4px 2px;
+  text-align: center;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-table th {
+  background-color: #e5e5e5;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-table .ev-td-operations {
+  width: 16%;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-table .ev-td-operations .ev-button {
+  margin: 0 6px;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-filter-articles {
+  display: flex;
+  align-items: center;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-filter-articles .dropdown {
+  margin-right: 20px;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-input-field {
+  margin-bottom: 10px;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-input-field span {
+  display: inline-block;
+  width: 90px;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-btns-field {
+  margin-top: 20px;
+  margin-left: 92px;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-btns-field .ev-button {
+  margin-right: 10px;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-avatar-container {
+  width: 240px;
+  height: 240px;
+  margin-right: 20px;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-avatar-container .ev-avatar-image {
+  display: block;
+  max-width: 100%;
+}
+.ev-center .ev-container .ev-contents .ev-field .ev-avartar-file {
+  margin: 4px 0 10px;
+}
+.ev-center .ev-container .ev-contents .ev-field.active {
+  display: block;
+}

@@ -8,7 +8,8 @@ const cors = require('cors')
 app.use(cors())
 
 // 前端静态网页
-app.use(express.static('./frontend'))
+app.use('/', express.static('./frontend'))
+app.use('/uploads/', express.static('./uploads'))
 
 // 中间件：通用消息返回
 app.use((req, res, next) => {
@@ -29,7 +30,12 @@ app.use(uploader.single('cover_img'))
 
 // 中间件：解析token 身份认证
 var expressjwt = require("express-jwt")
-app.use(expressjwt({ secret: process_env.jwtKey }).unless({ path: [/^\/api\//]}))
+app.use(expressjwt({ secret: process_env.jwtKey }).unless({
+    path: [ 
+        /^\/api\//, 
+        /^\/pub\//,
+    ] 
+}))
 
 // 导入并使用路由
 const router = require('./router/router')

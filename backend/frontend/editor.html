@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑文章</title>
+    <link rel="stylesheet" href="./libs/bootstrap-3.4.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/editor.css">
+</head>
+
+<body>
+    <!-- 通用导航条 -->
+    <nav class="ev-com-navbar navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img class="ev-icon-brand" alt="Brand" src="./images/logo.png">
+                </a>
+            </div>
+            <div class="navbar-right ev-mode-default">
+                <button type="button" class="btn btn-default navbar-btn ev-no-border">Sign in</button>
+                <button type="button" class="btn btn-default navbar-btn">Sign up</button>
+            </div>
+            <div class="navbar-right ev-mode-user">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-default navbar-btn dropdown-toggle ev-no-border"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="ev-ico-user" src="./favicon.ico" alt=""><span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Signed in as<br>lee_09</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Your profile</a></li>
+                        <li><a href="#">Your articles</a></li>
+                        <li><a href="#">New article</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Sign out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 编辑器主体 -->
+    <div class="ev-center">
+        <div class="container">
+            <div class="ev-editor">
+                <div class="ev-editor-head">
+                    <!-- <h2>标题</h2> -->
+                    <div class="ev-editor-input">
+                        <input type="text" placeholder="请输入文章标题">
+                    </div>
+                    <button class="ev-btn-editor btn" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
+                        保存文章
+                    </button>
+                </div>
+                <div class="ev-editor-body">
+                    <div id="ev-ck5-editor"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 发布文章 模态框 -->
+    <div class="ev-modal-field">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">发布文章</h4>
+                    </div>
+                    <div class="modal-body ev-submit-article-field">
+                        <form>
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">文章标题</label>
+                                <div class="ev-modal-title">这是文章标题</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">文章封面</label>
+                                <div class="ev-modal-cover">
+                                    <img class="ev-modal-cover-img" src="" alt="">
+                                    <div class="ev-modal-cover-picker">+</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="control-label">分类专栏</label>
+                                <!-- Single button -->
+                                <div class="btn-group ev-modal-cates">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    艺术 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">科技</a></li>
+                                        <li><a href="#">艺术</a></li>
+                                        <li><a href="#">宗教</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">新建分类</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-group ev-modal-new-cates">
+                                <label for="recipient-name" class="control-label">新建分类</label>
+                                分类名称<input class="ev-modal-new-cate-name" type="text">
+                                英文别名<input class="ev-modal-new-cate-alias" type="text">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">存为草稿</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">发布文章</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 通用底部 -->
+    <div class="ev-com-footer">
+        <div class="container">
+            <p>@ BigEvent 2022</p>
+        </div>
+    </div>
+
+    <!-- jquery -->
+    <script src="./libs/jquery-3.6.1.min.js"></script>
+    <!-- bootstrap -->
+    <script src="./libs/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+    <!-- ckeditor5 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/super-build/ckeditor.js"></script>
+    <!-- ck5 config -->
+    <script src="./js/ck5_editor.js"></script>
+</body>
+
+</html>

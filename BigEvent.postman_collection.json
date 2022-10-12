@@ -771,12 +771,85 @@
 							"path": [
 								""
 							]
-						}
+						},
+						"description": "### 博客前端首页"
+					},
+					"response": []
+				},
+				{
+					"name": "pubGetArticles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "pagesize",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "pagenum",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "cate_id",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/pub/article/list",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"pub",
+								"article",
+								"list"
+							]
+						},
+						"description": "### 获取文章列表"
+					},
+					"response": []
+				},
+				{
+					"name": "pubGetArticle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/pub/article/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"pub",
+								"article",
+								"1"
+							]
+						},
+						"description": "### 根据id获取文章信息"
 					},
 					"response": []
 				}
 			],
-			"description": "## 管理后台首页",
+			"description": "## 游客模式",
 			"auth": {
 				"type": "noauth"
 			},

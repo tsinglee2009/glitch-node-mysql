@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章内容</title>
+    <link rel="stylesheet" href="./libs/bootstrap-3.4.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/article.css">
+</head>
+
+<body>
+    <!-- 通用导航条 -->
+    <nav class="ev-com-navbar navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img class="ev-icon-brand" alt="Brand" src="./images/logo.png">
+                </a>
+            </div>
+            <div class="navbar-right ev-mode-default">
+                <button type="button" class="btn btn-default navbar-btn ev-no-border">Sign in</button>
+                <button type="button" class="btn btn-default navbar-btn">Sign up</button>
+            </div>
+            <div class="navbar-right ev-mode-user">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-default navbar-btn dropdown-toggle ev-no-border"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="ev-ico-user" src="./favicon.ico" alt=""><span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Signed in as<br>lee_09</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Your profile</a></li>
+                        <li><a href="#">Your articles</a></li>
+                        <li><a href="#">New article</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Sign out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 文章内容 -->
+    <div class="ev-center">
+        <div class="container">
+            <div class="ev-article">
+                <div class="ev-article-head">
+                    <h3 class="ev-article-title">MySQL数据库 主从复制和 Sharding-JDBC 实现读写分离</h3>
+                    <div class="ev-article-footer">
+                        分类: <span class="ev-article-cate">技术</span>
+                        作者: <span class="ev-article-author">小菜</span>
+                        发布时间: <span class="ev-article-date">2022/10/10</span>
+                    </div>
+                </div>
+                <div class="ev-article-body">
+                    <!-- article-content-start -->
+                    <div class="stackedit__html">
+                        <blockquote>
+                            <p><strong>说明</strong>：本文是搭建免费Node服务器的详细步骤，并不涉及服务器的代码实现，通过这种方式搭建的服务器，由于都是白嫖的所以不能确保数据安全性和连接稳定性，仅适用于入门学习和测试。
+                            </p>
+                        </blockquote>
+                        <h2><a id="1_Node_3"></a>1. 初始化Node项目</h2>
+                        <ul>
+                            <li><a href="https://glitch.com/">Glitch.com</a> 创建任意项目 (free &amp; public)</li>
+                            <li><a href="https://github.com/">Github.com</a> 创建node项目 (public)</li>
+                            <li><a href="http://www.sqlpub.com/">sqlpub.com</a> 获取mysql信息 (free)</li>
+                        </ul>
+                        <h2><a id="2_AuthToken_8"></a>2. 获取AuthToken值</h2>
+                        <ul>
+                            <li>网页端打开glitch项目editor</li>
+                            <li>F12 打开开发者工具</li>
+                            <li>导入github项目：glitch项目下方工具栏依次点击 “TOOLS --&gt; Import and Export --&gt; Import from GitHub
+                                --&gt; 填写github项目地址，导入”
+                                (ref <a
+                                    href="https://glitch.happyfox.com/kb/article/20-importing-code-from-github/">import-from-github</a>)
+                            </li>
+                            <li>开发者工具中记录
+                                githubImport?authorization…请求头中<strong>authorization</strong>和<strong>projectId</strong>的值，留备步骤4用
+                            </li>
+                        </ul>
+                        <h2><a id="3_env_14"></a>3. 项目环境变量env</h2>
+                        <ul>
+                            <li>glitch项目editor中新建 .env 文件，用于配置存储一些账户私有密码信息 (ref <a
+                                    href="https://glitch.happyfox.com/kb/section/25/">.env-in-glitch</a>)</li>
+                            <li>github项目check到本地，编写 process_env.js 模块<sup class="footnote-ref"><a href="#fn1"
+                                        id="fnref1">1</a></sup>，管理
+                                glitch模式 和 local模式 的 env 配置信息读取</li>
+                            <li>glitch模式通过 <strong>.env</strong>文件配置，本地模式通过 <strong>env</strong>文件配置，env文件加入
+                                <strong>.gitignore</strong> +
+                                <strong>env.js</strong>做替补空配置
+                            </li>
+                        </ul>
+                        <h2><a id="4_Glitch_19"></a>4. 项目自动同步Glitch</h2>
+                        <ul>
+                            <li>github项目中添加 ".github\workflows\SyncToGlitch.yml " 文件 (ref <a
+                                    href="https://github.com/kanadgupta/glitch-sync">kanadgupta/glitch-sync</a>)</li>
+                            <li>SyncToGlitch.yml中配置 project-id: ‘${{ secrets.PROJECT_ID }}’、auth-token: ‘${{
+                                secrets.AUTH_TOKEN }}’</li>
+                            <li>SyncToGlitch.yml中配置项 path可选，表示相对于github项目中的对应目录下的内容同步到glitch中</li>
+                            <li>网页端github项目在Settings-&gt;Secrets-&gt;Actions下添加
+                                PROJECT_ID=<strong>projectId</strong>、AUTH_TOKEN=<strong>authorization</strong></li>
+                            <li>本地修改内容提交至github即可自动同步至glitch项目中</li>
+                        </ul>
+                        <h2><a id="5_Start_Coding_26"></a>5. Start Coding</h2>
+                        <ul>
+                            <li>例如测试mysql数据库的连接</li>
+                            <li>local模式在env文件中配置数据库相关信息</li>
+                            <li>编写数据库连接代码</li>
+                            <li>验证通过后提交至github</li>
+                            <li>此时glitch项目已自动同步至最新</li>
+                            <li>glitch模式在.env中配置数据库相关信息</li>
+                            <li>查看glitch项目的输出日志和最终效果</li>
+                        </ul>
+                        <hr class="footnotes-sep">
+                        <section class="footnotes">
+                            <ol class="footnotes-list">
+                                <li id="fn1" class="footnote-item">
+                                    <p>我的完整测试项目 链接: <a
+                                            href="https://download.csdn.net/download/TSINGLEE0/86739116">download</a> <a
+                                            href="#fnref1" class="footnote-backref">↩︎</a></p>
+                                </li>
+                            </ol>
+                        </section>
+                    </div>
+                    <!-- article-content-end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 通用底部 -->
+    <div class="ev-com-footer">
+        <div class="container">
+            <p>@ BigEvent 2022</p>
+        </div>
+    </div>
+
+    <!-- jquery -->
+    <script src="./libs/jquery-3.6.1.min.js"></script>
+    <!-- bootstrap -->
+    <script src="./libs/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

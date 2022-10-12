@@ -20,6 +20,9 @@ const addArticle = require('./articles/add_article')
 const deleteArticle = require('./articles/delete_article')
 const getArticle = require('./articles/get_article')
 const updateArticle = require('./articles/update_article')
+// public 游客模式
+const pubGetArticle = require('./public/pub_get_article')
+const pubGetArticles = require('./public/pub_get_articles')
 
 // 导出路由处理函数
 module.exports = {
@@ -39,4 +42,6 @@ module.exports = {
     deleteArticle,
     getArticle,
     updateArticle,
+    pubGetArticle,
+    pubGetArticles,
 }

@@ -1,0 +1,30 @@
+.ev-center .container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px 4px #eee;
+}
+.ev-center .container .ev-article {
+  margin: 10px;
+  padding: 10px;
+}
+.ev-center .container .ev-article .ev-article-head {
+  padding-bottom: 30px;
+}
+.ev-center .container .ev-article .ev-article-head .ev-article-title {
+  line-height: 1.5;
+  padding: 6px 0;
+}
+.ev-center .container .ev-article .ev-article-head .ev-article-footer {
+  background-color: #f7f7f7;
+  padding: 10px;
+  border-radius: 6px;
+}
+.ev-center .container .ev-article .ev-article-head .ev-article-footer span {
+  margin-right: 20px;
+}
+.ev-center .container .ev-article .ev-article-body ul {
+  list-style-type: disc;
+  padding-left: 2rem;
+}

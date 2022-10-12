@@ -1,0 +1,84 @@
+body {
+  background-color: #f4f7f9;
+  padding-bottom: 90px;
+}
+input {
+  border-width: 1px;
+}
+input:focus {
+  border: 1px solid hsl(218, 81.8%, 56.9%);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1) inset;
+  outline: none;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+  outline: none;
+  outline-offset: 2px;
+}
+.ev-com-navbar {
+  margin-bottom: 0;
+  height: 54px;
+  background-color: #1f2228;
+}
+.ev-com-navbar .navbar-header {
+  float: left!important;
+  padding-left: 20px;
+}
+.ev-com-navbar .navbar-header .navbar-brand {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+.ev-com-navbar .navbar-header .navbar-brand .ev-icon-brand {
+  height: 100%;
+}
+.ev-com-navbar .navbar-right {
+  float: right!important;
+  margin-right: 20px;
+}
+.ev-com-navbar .navbar-right .btn {
+  color: #ddd;
+  border-radius: 6px;
+  background-color: transparent!important;
+}
+.ev-com-navbar .navbar-right .btn.ev-no-border {
+  border-color: transparent;
+}
+.ev-com-navbar .navbar-right .btn:hover {
+  opacity: 0.85;
+}
+.ev-com-navbar .navbar-right.ev-mode-default {
+  display: block;
+}
+.ev-com-navbar .navbar-right.ev-mode-user {
+  display: block;
+}
+.ev-com-navbar .navbar-right.ev-mode-user .btn {
+  margin-top: 4px !important;
+}
+.ev-com-navbar .navbar-right.ev-mode-user .btn .ev-ico-user {
+  margin-right: 4px;
+  height: 30px;
+  vertical-align: middle;
+  line-height: 54px;
+}
+.ev-com-navbar .navbar-right.ev-mode-user .dropdown-menu {
+  left: -100% !important;
+}
+.ev-com-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 90px;
+  padding-top: 20px;
+  color: #ddd;
+  background-color: #1f2228;
+}
