@@ -4,7 +4,7 @@ const db = require('../../js/database')
 module.exports = (req, res) => {
 
     // 查询新增分类的 name 或 alias 是否被占用
-    const sql_check = `select * from ev_article_cates where name=? or alias=?`
+    const sql_check = `select * from ${req.USER_TABLE_CATES} where name=? or alias=?`
     db.query(sql_check, [ req.body.name, req.body.alias ], (err, results) => {
 
         if (err) return res.cc(err)
@@ -32,7 +32,7 @@ module.exports = (req, res) => {
 
         // 新增文章分类至数据库
         if (is_cached) {
-            const sql_update = `update ev_article_cates set is_delete=0 where id=?`
+            const sql_update = `update ${req.USER_TABLE_CATES} set is_delete=0 where id=?`
             db.query(sql_update, results[0].id, (err, results) => {
 
                 if (err) return res.cc(err)
@@ -44,7 +44,7 @@ module.exports = (req, res) => {
             })
         }
         else {
-            const sql_insert = `insert into ev_article_cates set ?`
+            const sql_insert = `insert into ${req.USER_TABLE_CATES} set ?`
             db.query(sql_insert, req.body, (err, results) => {
                 
                 if (err) return res.cc(err)

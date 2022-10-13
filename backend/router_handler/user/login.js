@@ -27,6 +27,10 @@ module.exports = (req, res) => {
             return res.cc('密码错误')
         }
 
+        // 新加多用户功能
+        // 注册成功后新建两张用户表 ev_user${userid}_cates 和 ev_user${user}_articles
+        db.init_user_tables(results[0].id)
+
         // 生成token
         // a. 剔除 password 和 user_pic
         const user = { ...results[0], user_pic: '', password: '' }

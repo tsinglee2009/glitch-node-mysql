@@ -14,7 +14,6 @@ $(function () {
 
         function resize_item() {
             // 动态修改不生效 ？
-            console.log(getClientHeight())
             jqObj.css('min-height', (getClientHeight() - 144 - offset) + 'px')
         }
     }

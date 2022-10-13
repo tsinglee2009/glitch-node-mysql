@@ -9,7 +9,10 @@ app.use(cors())
 
 // 前端静态网页
 app.use('/', express.static('./frontend'))
-app.use('/uploads/', express.static('./uploads'))
+// 前端显示图片
+app.get('/uploads/*', (req, res) => {
+    res.sendFile(__dirname + "/" + req.url);
+})
 
 // 中间件：通用消息返回
 app.use((req, res, next) => {
@@ -36,6 +39,10 @@ app.use(expressjwt({ secret: process_env.jwtKey }).unless({
         /^\/pub\//,
     ] 
 }))
+
+// 新增用户表名处理
+const usertables = require('./js/usertables')
+app.use(usertables)
 
 // 导入并使用路由
 const router = require('./router/router')

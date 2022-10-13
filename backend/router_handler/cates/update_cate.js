@@ -3,7 +3,7 @@ const db = require('../../js/database')
 // 根据id更新文章分类
 module.exports = (req, res) => {
     
-    const sql_check = `select * from ev_article_cates where id<>? and (name=? or alias=?)`
+    const sql_check = `select * from ${req.USER_TABLE_CATES} where id<>? and (name=? or alias=?)`
     db.query(sql_check, [ req.body.id, req.body.name, req.body.alias ], (err, results) => {
         
         if (err) return res.cc(err)
@@ -25,7 +25,7 @@ module.exports = (req, res) => {
         }
 
         // 开始更新
-        const sql_update = `update ev_article_cates set ? where id=?`
+        const sql_update = `update ${req.USER_TABLE_CATES} set ? where id=?`
         db.query(sql_update, [ req.body, req.body.id ], (err, results) => {
 
             if (err) return res.cc(err)

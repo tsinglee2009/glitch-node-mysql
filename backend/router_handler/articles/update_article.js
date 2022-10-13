@@ -14,7 +14,7 @@ module.exports = (req, res) => {
         res.cc_pre_fn = () => fs.unlinkSync(req.file.path)
     }
 
-    const sql_update = `update ev_articles set ? where Id=?`
+    const sql_update = `update ${req.USER_TABLE_ARTICLES} set ? where Id=?`
     db.query(sql_update, [ data, data.Id ], (err, results) => {
         if (err) return res.cc(err)
         if (results.affectedRows !== 1) {

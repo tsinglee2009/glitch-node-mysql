@@ -32,8 +32,8 @@
                 <ul class="dropdown-menu">
                   <li><a id="dropdown-name-item" href="./dashboard.html?act=userinfo">Signed in as<br>lee_09</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="./dashboard.html#userinfo">Your profile</a></li>
-                  <li><a href="./dashboard.html#articles">Your articles</a></li>
+                  <li><a id="ev-your-profile" href="./dashboard.html#userinfo">Your profile</a></li>
+                  <li><a id="ev-your-articles" href="./dashboard.html#articles">Your articles</a></li>
                   <li><a href="./editor.html">New article</a></li>
                   <li role="separator" class="divider"></li>
                   <li><a id="dropdown-signout-item" href="#">Sign out</a></li>
@@ -110,24 +110,25 @@
                         <div class="ev-filter ev-filter-articles">
                             <div class="ev-filter-cates dropdown">
                                 <button type="button" class="btn btn-default ev-button navbar-btn dropdown-toggle ev-no-border" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    所有分类&nbsp;<span class="caret"></span>
+                                    <span id="ev-dropdown-article-cate-select">所有分类</span>&nbsp;<span class="caret"></span>
                                 </button>
-                                <ul class="dropdown-menu">
-                                <li><a href="#">分类1</a></li>
-                                <li><a href="#">分类2</a></li>
-                                <li><a href="#">分类3</a></li>
+                                <ul id="ev-dropdown-article-cate" class="dropdown-menu">
+                                    <li><a href="#">分类1</a></li>
+                                    <li><a href="#">分类2</a></li>
+                                    <li><a href="#">分类3</a></li>
                                 </ul>
                             </div>
                             <div class="ev-filter-states dropdown">
                                 <button type="button" class="btn btn-default ev-button navbar-btn dropdown-toggle ev-no-border" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    所有状态&nbsp;<span class="caret"></span>
+                                    <span id="ev-dropdown-article-state-select">所有状态</span>&nbsp;<span class="caret"></span>
                                 </button>
-                                <ul class="dropdown-menu">
-                                <li><a href="#">草稿</a></li>
-                                <li><a href="#">已发布</a></li>
+                                <ul id="ev-dropdown-article-state" class="dropdown-menu">
+                                    <li><a href="#" data-state="-1">所有状态</a></li>
+                                    <li><a href="#" data-state="0">草稿</a></li>
+                                    <li><a href="#" data-state="1">已发布</a></li>
                                 </ul>
                             </div>
-                            <button class="btn btn-default ev-button">筛选</button>
+                            <button id="ev-btn-articles-filter" class="btn btn-default ev-button">筛选</button>
                         </div>
                         <table class="ev-table">
                             <thead>
@@ -137,27 +138,7 @@
                                 <th>状态</th>
                                 <th>操作</th>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>文章标题1</td>
-                                    <td>分类1</td>
-                                    <td>2022/10/10 10:10:10</td>
-                                    <td>草稿</td>
-                                    <td class="ev-td-operations">
-                                        <button class="btn btn-default ev-button">编辑</button>
-                                        <button class="btn btn-default ev-button">删除</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>文章标题1</td>
-                                    <td>分类1</td>
-                                    <td>2022/10/10 10:10:10</td>
-                                    <td>草稿</td>
-                                    <td class="ev-td-operations">
-                                        <button class="btn btn-default ev-button">编辑</button>
-                                        <button class="btn btn-default ev-button">删除</button>
-                                    </td>
-                                </tr>
+                            <tbody id="ev-tpl-holder-articles">
                             </tbody>
                         </table>
                     </div>
@@ -225,7 +206,7 @@
             <p>@ BigEvent 2022</p>
         </div>
     </div>
-    <!-- template -->
+    <!-- template cates contents -->
     <script type="text/html" id="ev-tpl-cates">
         {{each data}}
         <tr class="ev-cates-tr-editor">
@@ -238,8 +219,27 @@
         </tr>
         {{/each}}
     </script>
+    <!-- temmplate cates list -->
+    <script type="text/html" id="ev-tpl-cates-dropdown">
+        <li><a href="#" data-cate-id="-1">所有分类</a></li>
+        {{each data}}
+        <li><a href="#" data-cate-id={{$value.id}}>{{$value.name}}</a></li>
+        {{/each}}
+    </script>
+    <!-- template articles contents -->
     <script type="text/html" id="ev-tpl-articles">
-
+        {{each data}}
+        <tr>
+            <td>{{$value.title}}</td>
+            <td>{{$value.cate_name}}</td>
+            <td>{{$value.pub_date}}</td>
+            <td>{{$value.state}}</td>
+            <td class="ev-td-operations">
+                <button class="btn btn-default ev-button ev-btn-article-edit" data-id={{$value.Id}}>编辑</button>
+                <button class="btn btn-default ev-button ev-btn-article-del" data-id={{$value.Id}}>删除</button>
+            </td>
+        </tr>
+        {{/each}}
     </script>
     <!-- jquery -->
     <script src="./libs/jquery-3.6.1.min.js"></script>

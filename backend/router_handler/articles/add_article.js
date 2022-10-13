@@ -13,7 +13,7 @@ module.exports = (req, res) => {
     res.cc_pre_fn = () => fs.unlinkSync(req.file.path)
 
     // 检查文章分类
-    const sql_check = `select * from ev_article_cates where is_delete=0 and id=?`
+    const sql_check = `select * from ${req.USER_TABLE_CATES} where is_delete=0 and id=?`
     db.query(sql_check, req.body.cate_id, (err, results) => {
         // sql err
         if (err) return res.cc(err)
@@ -29,7 +29,7 @@ module.exports = (req, res) => {
             author_id: req.user.id,
         }
         // 添加新文章
-        const sql_insert = `insert into ev_articles set ?`
+        const sql_insert = `insert into ${req.USER_TABLE_ARTICLES} set ?`
         db.query(sql_insert, new_article, (err, results) => {
             // sql err
             if (err) return res.cc(err)

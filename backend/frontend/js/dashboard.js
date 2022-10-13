@@ -2,8 +2,11 @@ $(function() {
 
     global_ev_resize_exec($('#ev-resizable'))
 
+    // 右上角菜单
+    $('#ev-your-profile').click(() => selectGroup('#userinfo'))
+    $('#ev-your-articles').click(() => selectGroup('#articles'))
     // 选中位置
-    selectGroup(location.search || '#userinfo')
+    selectGroup(location.hash || '#userinfo')
 
     // 设置项事件
     $('.ev-sub-item').click((e) => {
@@ -40,7 +43,7 @@ $(function() {
         targetField.addClass('show')
 
         if (targetField.attr('id') === 'ev-field-avatar') onload_avatar() // 用户头像修改
-        else if (targetField.attr('id') === 'ev-field-cates') onload_cates() // 文章类别
+        else if (targetField.attr('id') === 'ev-field-cates') handle_load_cates() // 文章类别
         else if (targetField.attr('id') === 'ev-field-articles') onload_articles() // 文章列表
     }
 
@@ -108,7 +111,7 @@ $(function() {
     })
 
     // 4. 文章类别
-    function onload_cates() {
+    function ajax_load_cates(cb) {
         // 加载已有文章类别信息
         $.ajax({
             type: 'get',
@@ -117,16 +120,22 @@ $(function() {
                 'Accept': 'application/json',
                 'Authorization': global_ev_token
             },
-            success : (res) => {
-                if (res.status === 1) {
-                    alert(res.message)
-                }
-                else {
-                    // 4. 调用 template函数
-                    var htmlStr = template('ev-tpl-cates', res)
-                    // 5. 渲染HTML
-                    $('#ev-cates-container').html(htmlStr)
-                }
+            success : (res) => cb(res)
+        })
+    }
+    // 文章管理的类别处理
+    function handle_load_cates() {
+
+        ajax_load_cates((res) => {
+
+            if (res.status === 1) {
+                alert(res.message)
+            }
+            else {
+                // 4. 调用 template函数
+                var htmlStr = template('ev-tpl-cates', res)
+                // 5. 渲染HTML
+                $('#ev-cates-container').html(htmlStr)
             }
         })
     }
@@ -148,7 +157,7 @@ $(function() {
                 }
                 else {
                     $('#ev-form-add-cates')[0].reset()
-                    onload_cates()
+                    handle_load_cates()
                 }
             }
         })
@@ -232,9 +241,112 @@ $(function() {
         }
     })
 
-    // 5. 文章列表
-    function onload_articles() {
+    // 5. 文章列表 分类管理
 
+    var dropdown_cate_id
+    var dropdown_state
+
+    // 更新文章列表
+    function onload_articles() {
+        handle_articles_cates()
+        update_articles_list()
     }
 
+    function update_articles_list() {
+
+        ajax_load_articles((res) => {
+            var htmlStr = template('ev-tpl-articles', res)
+            $('#ev-tpl-holder-articles').html(htmlStr)
+        })
+    }
+
+    function ajax_load_articles(cb) {
+
+        var ajaxData = {}
+        ajaxData.pagesize = 5
+        ajaxData.pagenum = 0
+        if (dropdown_cate_id && dropdown_cate_id !== '-1')
+            ajaxData.cate_id = Number(dropdown_cate_id)
+        if (dropdown_state && dropdown_state !== '所有状态')
+            ajaxData.state = dropdown_state
+
+        $.ajax({
+            type: 'get',
+            url: '/my/article/list',
+            data: ajaxData,
+            traditional: true,
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': global_ev_token
+            },
+            success : (res) => cb(res)
+        })
+    }
+
+    function handle_articles_cates() {
+
+        ajax_load_cates((res) => {
+
+            if (res.status === 1) {
+                alert(res.message)
+            }
+            else {
+                // 4. 调用 template函数
+                var htmlStr = template('ev-tpl-cates-dropdown', res)
+                // 5. 渲染HTML
+                $('#ev-dropdown-article-cate').html(htmlStr)
+            }
+        })
+    }
+    // 筛选按钮
+    $('#ev-btn-articles-filter').click(() => update_articles_list())
+    // 文章分类下拉列表点击
+    $('#ev-dropdown-article-cate').click((e) => {
+        var target = $(e.target)
+        var cate_id = target.attr('data-cate-id')
+        if (cate_id) {
+            $('#ev-dropdown-article-cate-select').html(target.html())
+            dropdown_cate_id = cate_id
+        }
+    })
+    // 文章状态下拉列表点击
+    $('#ev-dropdown-article-state').click((e) => {
+        var target = $(e.target)
+        var state_id = target.attr('data-state')
+        if (state_id) {
+            dropdown_state = target.html()
+            $('#ev-dropdown-article-state-select').html(dropdown_state)
+        }
+    })
+    // 编辑文章和删除文章事件
+    $('#ev-tpl-holder-articles').click((e) => {
+        e.preventDefault()
+
+        var target = $(e.target)
+        var article_id = Number(target.attr('data-id'))
+
+        // 编辑
+        if (target.hasClass('ev-btn-article-edit')) {
+            sessionStorage.setItem('ev-edit-article-id', article_id)
+            location.assign('./editor.html')
+        }
+        // 删除
+        else if (target.hasClass('ev-btn-article-del')) {
+            $.ajax({
+                type: 'get',
+                url: '/my/article/delete/' + article_id,
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': global_ev_token
+                },
+                success: (res) => {
+                    if (res.status === 1) {
+                        alert(res.message)
+                    } else {
+                        target.parents('tr').addClass('hide')
+                    }
+                }
+            })
+        }
+    })
 })

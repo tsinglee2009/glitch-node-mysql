@@ -35,6 +35,10 @@ module.exports = (req, res) => {
                 return res.cc('注册用户失败，请稍后再试！')
             }
 
+            // 新加多用户功能
+            // 注册成功后新建两张用户表 ev_user${userid}_cates 和 ev_user${user}_articles
+            db.init_user_tables(results.insertId)
+
             res.cc('注册成功！', 0)
         })
 

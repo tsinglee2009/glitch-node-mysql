@@ -24,7 +24,7 @@ exports.add_article_schema = {
 }
 
 exports.get_articles_schema = {
-    body : {
+    query : {
         cate_id : op_cate_id,
         state : op_state,
         pagesize,

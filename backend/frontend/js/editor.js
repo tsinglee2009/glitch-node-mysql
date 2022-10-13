@@ -2,22 +2,69 @@ $(function() {
     
     var articleCateId = 0
     var articleTitle = ''
+    var articleContent = ''
     var articleCover = undefined
 
+    // 编辑现有文章
+    var editor_article_cate_id
+    var editor_article_id = sessionStorage.getItem('ev-edit-article-id') || -1
+    // clear after read it
+    sessionStorage.removeItem('ev-editor-article-id')
+
+    // 读取编辑状态，当前编辑的文章id是
+    if (editor_article_id !== -1) {
+
+        // 获取文章内容
+        $.ajax({
+            type: 'get',
+            url: `/my/article/${editor_article_id}`,
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': global_ev_token
+            },
+            success: (res) => {
+                if (res.status === 1) {
+                    alert(res.message)
+                }
+                else {
+                    // 初始化编辑器内容
+                    init_editor_by_data(res.data)
+                }
+            }
+        })
+
+    }
+
+    // 初始化编辑器内容
+    function init_editor_by_data(data) {
+        // 标题
+        $('#ev-ipt-title').val(data.title)
+        // 内容
+        ev_ckeditor.setData(data.content)
+        // 封面图片
+        $('.ev-modal-cover-img').attr('src', data.cover_img)
+        $('.ev-modal-cover').addClass('ev-modal-img-picked')
+        // 文章分类
+        editor_article_cate_id = data.cate_id
+    }
+
+    // 保存按钮
     $('#ev-btn-save').click((e) => {
         e.preventDefault()
 
         articleTitle = $('#ev-ipt-title').val()
-
-        // if (!strTitle || !strContent) return
+        articleContent = ev_ckeditor.getData()
 
         // save article
 
-        // set title
-        $('#ev-modal-title').html(articleTitle)
-        // update dropdown
-        load_cates()
-
+        if (articleTitle !== '' && articleContent !== '') {
+            // open modal
+            $('#exampleModal').modal('show')
+            // set title
+            $('#ev-modal-title').html(articleTitle)
+            // update dropdown
+            load_cates()
+        }
     })
 
     // 上传文件
@@ -104,9 +151,16 @@ $(function() {
                     // 5. 渲染HTML
                     $('#ev-cates-container').html(htmlStr)
                     // init dropdown
-                    var first_item = $('#ev-cates-container').find('li a:eq(0)')
-                    articleCateId = first_item.attr('data-id')
-                    $('#ev-dropdown-text').html(first_item.html())
+                    if (editor_article_cate_id != -1) {
+                        var selectItem =$('#ev-cates-container').find(`[data-id=${editor_article_cate_id}]`)
+                        articleCateId = editor_article_cate_id
+                        $('#ev-dropdown-text').html(selectItem.html())
+                    }
+                    else {
+                        var selectItem = $('#ev-cates-container').find('li a:eq(0)')
+                        articleCateId = selectItem.attr('data-id')
+                        $('#ev-dropdown-text').html(selectItem.html())
+                    }
                     $('#ev-modal-new-cates').addClass('hide')
                 }
             }
@@ -116,18 +170,27 @@ $(function() {
     // 提交新文章 pub=已发布
     function submit_new_article(pub) {
 
-        var strContent = CKEDITOR.ClassicEditor.ev_instance.getData()
-
         var formData = new FormData()
         formData.append('title', articleTitle)
         formData.append('cate_id', articleCateId)
-        formData.append('content', strContent)
+        formData.append('content', articleContent)
         formData.append('state', pub ? '已发布' : '草稿')
         formData.append('cover_img', articleCover)
 
+        var postUrl
+
+        if (editor_article_id === -1) {
+            postUrl = '/my/article/add'
+        }
+        else {
+            postUrl = '/my/article/edit'
+            formData.append('Id', editor_article_id)
+        }
+
+        // 更新文章 or 发布文章
         $.ajax({
             type: 'post',
-            url: '/my/article/add',
+            url: postUrl,
             cache: false,
             contentType: false,
             processData: false,
@@ -142,6 +205,9 @@ $(function() {
                     alert(res.message)
                 }
                 else {
+                    // open modal
+                    $('#exampleModal').modal('hide')
+                    //
                     alert('上传成功！！！！！！')
                 }
             }

@@ -4,10 +4,17 @@ const moment = require('moment')
 // 文章管理 - 获取文章列表
 module.exports = (req, res) => {
 
-    var pagesize = req.body.pagesize
-    var pagenum = req.body.pagenum
-    var state = req.body.state
-    var cate_id = req.body.cate_id
+    var pagesize = req.query.pagesize
+    var pagenum = req.query.pagenum
+    var state = req.query.state
+    var cate_id = req.query.cate_id
+
+    // console.log('params')
+    // console.log(req.params)
+    // console.log('query')
+    // console.log(req.query)
+    // console.log('body')
+    // console.log(req.body.pagesize)
 
     var filter = `where is_delete=0`
     // check option params
@@ -19,13 +26,9 @@ module.exports = (req, res) => {
         filter += ` and state="${state}"`
     }
 
-    // format date
-    var formatter = (d) => {
-        return moment(new Date(Date(d))).format('YYYY-MM-DD HH:mm:ss')
-    }
-
     // 获取文章列表
-    const sql_get = `select Id,title,pub_date,state,cate_id from ev_articles ${filter} limit ?,?`
+    const sql_get = `select Id,title,pub_date,state,cate_id from ${req.USER_TABLE_ARTICLES} ${filter} limit ?,?`
+    // console.log(sql_get)
     db.query(sql_get, [ pagesize * pagenum, pagesize ], (err, results) => {
         // sql err
         if (err) return res.cc(err)
@@ -55,7 +58,7 @@ module.exports = (req, res) => {
                 sql_filter += ` and ${types}`
             }
 
-            const sql_check = `select id,name from ev_article_cates ${sql_filter}`
+            const sql_check = `select id,name from ${req.USER_TABLE_CATES} ${sql_filter}`
             db.query(sql_check, (err, results) => {
                 // sql err 
                 if (err) return res.cc(err)
@@ -64,7 +67,6 @@ module.exports = (req, res) => {
                 // success
                 data.forEach((item) => {
                     item.cate_name = tyeps_map.get(item.cate_id)
-                    item.pub_date = formatter(item.pub_date)
                     item.cate_id = undefined
                 })
                 // 响应给客户端
