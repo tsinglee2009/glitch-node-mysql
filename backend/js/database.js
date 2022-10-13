@@ -12,6 +12,11 @@ var connection = mysql.createConnection({
 
 // db tables config
 const table_names = [ 'ev_users' /*, 'ev_article_cates', 'ev_articles'*/ ]
+// db default cate name & alias
+const CATE_DEFAULT = {
+  name: "未命名",
+  alias: 'default'
+}
 
 var tablesMap = new Map()
 table_names.forEach(item => {
@@ -79,11 +84,9 @@ connection.init_user_tables = (userid) => {
   connection.query(sql_arts)
 
   // 插入默认文章分类数据
-  const C_NAME = `未分类`
-  const C_ALIAS = `default`
-  connection.query(`select name from ${TABLE_CATES} where name = "${C_NAME}"`, (err, results) => {
+  connection.query(`select name from ${TABLE_CATES} where name = "${CATE_DEFAULT.name}"`, (err, results) => {
       if (!err && results.length !== 1)
-        connection.query(`insert into ${TABLE_CATES} (name, alias) values ("${C_NAME}", "${C_ALIAS}")`)
+        connection.query(`insert into ${TABLE_CATES} (name, alias) values ("${CATE_DEFAULT.name}", "${CATE_DEFAULT.alias}")`)
   })
   
   function load_sql(table_name) {
@@ -100,5 +103,7 @@ connection.init_user_tables = (userid) => {
 connection.get_user_cates_table_name = (userid) => { return `ev_user${userid}_cates` }
 // 获取用户文章表名
 connection.get_user_articles_table_name = (userid) => { return `ev_user${userid}_articles` }
+// 文章的默认分类名
+connection.default_cate_names = CATE_DEFAULT
 
 module.exports = connection
