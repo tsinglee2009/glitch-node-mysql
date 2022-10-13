@@ -24,6 +24,8 @@ module.exports = (req, res) => {
 
         // 3. 对密码进行加密保护 bcrypt.hashSync(明文密码, 随机盐的长度)
         userinfo.password = bcrypt.hashSync(userinfo.password, 10)
+        // 设置用户的默认头像
+        // userinfo.user_pic = 
 
         // 4. db 插入新用户
         const sql_insert = `insert into ev_users set ?`

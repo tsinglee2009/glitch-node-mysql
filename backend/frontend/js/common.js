@@ -2,7 +2,6 @@ $(function () {
 
     // 全局变量
     global_ev_token = localStorage.getItem('token')
-    global_ev_userid = localStorage.getItem('userid')
 
     global_ev_resize_exec = function (jqObj, offset = 0) {
 
@@ -54,9 +53,6 @@ $(function () {
                     location.assign('./login.html')
                 }
                 else {
-                    global_ev_userid = res.data.id
-                    localStorage.setItem('userid', res.data.id)
-                    
                     var drop_name_item = $('#dropdown-name-item')
                     drop_name_item.html(`Signed in as<br>${res.data.nickname || res.data.username}`)
                     drop_name_item.attr('href', 'javascript:;')

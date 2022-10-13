@@ -51,12 +51,10 @@ $(function() {
     $('#ev-btn-update-userinfo').click((e) => {
         e.preventDefault()
 
-        var dataStr = `id=${global_ev_userid}&` + $('#ev-form-userinfo').serialize()
-
         $.ajax({
             type: 'post',
             url: '/my/userinfo',
-            data: dataStr,
+            data: $('#ev-form-userinfo').serialize(),
             headers: {
                 'Accept': 'application/json',
                 'Authorization': global_ev_token
@@ -136,6 +134,10 @@ $(function() {
                 var htmlStr = template('ev-tpl-cates', res)
                 // 5. 渲染HTML
                 $('#ev-cates-container').html(htmlStr)
+
+                // 默认分类隐藏操作按钮
+                var opt = $('#ev-cates-container').find(`[data-cate-name="未分类"]`)
+                if (opt) opt.find('button').addClass('hide')
             }
         })
     }
@@ -347,6 +349,11 @@ $(function() {
                     }
                 }
             })
+        }
+        // 查看
+        else if (target.hasClass('ev-btn-article-view')) {
+            sessionStorage.setItem('ev-view-article-id', article_id)
+            location.assign('./article.html')
         }
     })
 })

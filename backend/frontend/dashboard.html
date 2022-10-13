@@ -212,7 +212,7 @@
         <tr class="ev-cates-tr-editor">
             <td><span>{{$value.name}}</span><input type="text"></td>
             <td><span>{{$value.alias}}</span><input type="text"></td>
-            <td class="ev-td-operations" data-cate-id={{$value.id}}>
+            <td class="ev-td-operations" data-cate-id={{$value.id}} data-cate-name="{{$value.name}}">
                 <button class="btn btn-default ev-button ev-btn-cate-edit">编辑</button>
                 <button class="btn btn-default ev-button ev-btn-cate-del">删除</button>
             </td>
@@ -235,6 +235,7 @@
             <td>{{$value.pub_date}}</td>
             <td>{{$value.state}}</td>
             <td class="ev-td-operations">
+                <button class="btn btn-default ev-button ev-btn-article-view" data-id={{$value.Id}}>查看</button>
                 <button class="btn btn-default ev-button ev-btn-article-edit" data-id={{$value.Id}}>编辑</button>
                 <button class="btn btn-default ev-button ev-btn-article-del" data-id={{$value.Id}}>删除</button>
             </td>

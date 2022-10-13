@@ -27,7 +27,7 @@ module.exports = (req, res) => {
     }
 
     // 获取文章列表
-    const sql_get = `select Id,title,pub_date,state,cate_id from ${req.USER_TABLE_ARTICLES} ${filter} limit ?,?`
+    const sql_get = `select Id,title,pub_date,state,cate_id,cover_img from ${req.USER_TABLE_ARTICLES} ${filter} limit ?,?`
     // console.log(sql_get)
     db.query(sql_get, [ pagesize * pagenum, pagesize ], (err, results) => {
         // sql err

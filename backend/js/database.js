@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 });
 
 // db tables config
-const table_names = [ 'ev_users', 'ev_article_cates', 'ev_articles' ]
+const table_names = [ 'ev_users' /*, 'ev_article_cates', 'ev_articles'*/ ]
 
 var tablesMap = new Map()
 table_names.forEach(item => {
@@ -69,16 +69,22 @@ function create_table_itr(itr) {
 // 注册成功后新建两张用户表 ev_user${userid}_cates 和 ev_user${userid}_articles
 connection.init_user_tables = (userid) => {
 
-  const sql_cates = load_sql('ev_article_cates').replace(`ev_article_cates`, `ev_user${userid}_cates`)
+  const TABLE_CATES = connection.get_user_cates_table_name(userid)
+  const TABLE_ARTICLES = connection.get_user_articles_table_name(userid)
+
+  const sql_cates = load_sql('ev_article_cates').replace(`ev_article_cates`, TABLE_CATES)
   connection.query(sql_cates)
 
-  const sql_arts = load_sql('ev_articles').replace(`ev_articles`, `ev_user${userid}_articles`)
+  const sql_arts = load_sql('ev_articles').replace(`ev_articles`, TABLE_ARTICLES)
   connection.query(sql_arts)
 
   // 插入默认文章分类数据
-  var default_cate = { name: '未分类', alias: 'default' }
-  const sql_insert = `insert into ${get_user_cates_table_name(userid)} set ?`
-  connection.query(sql_insert, default_cate)
+  const C_NAME = `未分类`
+  const C_ALIAS = `default`
+  connection.query(`select name from ${TABLE_CATES} where name = "${C_NAME}"`, (err, results) => {
+      if (!err && results.length !== 1)
+        connection.query(`insert into ${TABLE_CATES} (name, alias) values ("${C_NAME}", "${C_ALIAS}")`)
+  })
   
   function load_sql(table_name) {
     var sql = ``

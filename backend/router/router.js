@@ -26,7 +26,7 @@ router.post('/my/update/avatar', expressJoi(avatar_schema), handler.updateAvatar
 router.get('/my/article/cates', handler.getCateList) // 获取文章分类列表
 router.post('/my/article/addcates', expressJoi(add_cate_schema), handler.addCate) // 新增文章分类
 router.get('/my/article/deletecate/:id', expressJoi(delete_cate_schema), handler.deleteCate) // 删除文章分类
-router.get('/my/article/cates/:id', expressJoi(delete_cate_schema), handler.getArticle) // 根据id获取分类
+router.get('/my/article/cates/:id', expressJoi(delete_cate_schema), handler.getCate) // 根据id获取分类
 router.post('/my/article/updatecate', expressJoi(update_cate_schema), handler.updateCate) // 根据id更新分类
 // articles 文章管理
 router.get('/my/article/list', expressJoi(get_articles_schema), handler.getArticleList) // 获取文章列表

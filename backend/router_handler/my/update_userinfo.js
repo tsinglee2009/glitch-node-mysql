@@ -6,7 +6,7 @@ module.exports = (req, res) => {
     // console.log(req.user)
 
     const sql_update = `update ev_users set ? where id=?`
-    db.query(sql_update, [ req.body, req.body.id ], (err, results) => {
+    db.query(sql_update, [ req.body, req.user.id ], (err, results) => {
         // sql 查询失败
         if (err) return res.cc(err)
         // sql 查询成功，获取用户信息

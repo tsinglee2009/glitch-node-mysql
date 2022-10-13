@@ -46,7 +46,7 @@
     <div class="ev-center">
         <div class="container">
             <ul class="ev-article-list">
-                <li class="ev-article-item">
+                <li class="ev-article-item hide">
                     <div class="ev-article-cover">
                         <img class="ev-article-cover-img" src="./images/logo.png" alt="">
                     </div>
@@ -80,6 +80,26 @@
     <script src="./libs/jquery-3.6.1.min.js"></script>
     <!-- bootstrap -->
     <script src="./libs/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+    <!-- art-template -->
+    <script src="./libs/art-template-4.13.2.min.js"></script>
+    <!-- art-template -->
+    <script type="text/html" id="ev-tpl-item">
+        {{each data}}
+        <li class="ev-article-item" data-id={{$value.Id}}>
+            <div class="ev-article-cover">
+                <img class="ev-article-cover-img" src="{{$value.cover_img}}" alt="">
+            </div>
+            <div class="ev-article-info">
+                <h4 class="ev-article-title">{{$value.title}}</h4>
+                <div class="ev-article-footer">
+                    分类: <span class="ev-article-cate">{{$value.cate_name}}</span>
+                    状态: <span class="ev-article-author">{{$value.state}}</span>
+                    发布时间: <span class="ev-article-date">{{$value.pub_date}}</span>
+                </div>
+            </div>
+        </li>
+        {{/each}}
+    </script>
     <!--  -->
     <script src="./js/common.js"></script>
     <script src="./js/index.js"></script>

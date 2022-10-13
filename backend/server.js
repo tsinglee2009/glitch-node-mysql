@@ -9,6 +9,7 @@ app.use(cors())
 
 // 前端静态网页
 app.use('/', express.static('./frontend'))
+app.use('/uploads/', express.static('./uploads'))
 // 前端显示图片
 app.get('/uploads/*', (req, res) => {
     res.sendFile(__dirname + "/" + req.url);
@@ -17,7 +18,7 @@ app.get('/uploads/*', (req, res) => {
 // 中间件：通用消息返回
 app.use((req, res, next) => {
     res.cc = (err, status = 1) => {
-        if (res.cc_pre_fn) res.cc_pre_fn()
+        if (status === 1 && res.cc_pre_fn) res.cc_pre_fn()
         var msg = err instanceof Error ? err.message : err
         res.send({ status, message: msg})
     }
@@ -28,7 +29,7 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended : false }))
 
 // 中间件：解析表单数据校验 : multipart/form-data
-const uploader = require('./router_handler/uploader')
+const uploader = require('./js/uploader')
 app.use(uploader.single('cover_img'))
 
 // 中间件：解析token 身份认证

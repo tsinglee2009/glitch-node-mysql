@@ -9,7 +9,7 @@ $(function() {
     var editor_article_cate_id
     var editor_article_id = sessionStorage.getItem('ev-edit-article-id') || -1
     // clear after read it
-    sessionStorage.removeItem('ev-editor-article-id')
+    sessionStorage.removeItem('ev-edit-article-id')
 
     // 读取编辑状态，当前编辑的文章id是
     if (editor_article_id !== -1) {
@@ -151,16 +151,15 @@ $(function() {
                     // 5. 渲染HTML
                     $('#ev-cates-container').html(htmlStr)
                     // init dropdown
+                    var selectItem = null
                     if (editor_article_cate_id != -1) {
-                        var selectItem =$('#ev-cates-container').find(`[data-id=${editor_article_cate_id}]`)
-                        articleCateId = editor_article_cate_id
-                        $('#ev-dropdown-text').html(selectItem.html())
+                        selectItem =$('#ev-cates-container').find(`[data-id=${editor_article_cate_id}]`)
                     }
-                    else {
-                        var selectItem = $('#ev-cates-container').find('li a:eq(0)')
-                        articleCateId = selectItem.attr('data-id')
-                        $('#ev-dropdown-text').html(selectItem.html())
+                    if(!selectItem) {
+                        selectItem = $('#ev-cates-container').find('li a:eq(0)')
                     }
+                    articleCateId = selectItem.attr('data-id')
+                    $('#ev-dropdown-text').html(selectItem.html())
                     $('#ev-modal-new-cates').addClass('hide')
                 }
             }
@@ -176,6 +175,8 @@ $(function() {
         formData.append('content', articleContent)
         formData.append('state', pub ? '已发布' : '草稿')
         formData.append('cover_img', articleCover)
+
+        console.log(articleCover)
 
         var postUrl
 

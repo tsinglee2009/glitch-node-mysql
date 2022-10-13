@@ -2,7 +2,7 @@ const db = require('../../js/database')
 
 // 根据id获取文章分类
 module.exports = (req, res) => {
-    
+
     const sql_check = `select * from ${req.USER_TABLE_CATES} where id=?`
     db.query(sql_check, req.params.id, (err, results) => {
         

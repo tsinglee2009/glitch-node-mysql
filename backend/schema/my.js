@@ -8,7 +8,7 @@ const email = joi.string().email().required()
 exports.userinfo_schema = {
     // 表示需要对 req.body 中的数据进行验证
     body : {
-        id,
+        // id,
         nickname,
         email,
     }

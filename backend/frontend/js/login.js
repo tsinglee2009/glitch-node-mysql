@@ -21,7 +21,7 @@ $(function() {
             success: (res) => {
                 // 登录失败
                 if (res.status === 1) {
-                    alert('账号或密码错误！\n' + res.message)
+                    alert(res.message)
                 }
                 // 登录成功
                 else {
