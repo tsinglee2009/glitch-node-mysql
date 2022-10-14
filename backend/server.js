@@ -32,14 +32,19 @@ app.use(express.urlencoded({ extended : false, limit: '2mb' }))
 const uploader = require('./js/uploader')
 app.use(uploader.any())
 
+// // 中间件：解析token 身份认证
+// var expressjwt = require("express-jwt")
+// app.use(expressjwt({ secret: process_env.jwtKey }).unless({
+//     path: [ 
+//         /^\/api\//, 
+//         /^\/pub\//,
+//     ] 
+// }))
+
 // 中间件：解析token 身份认证
-var expressjwt = require("express-jwt")
-app.use(expressjwt({ secret: process_env.jwtKey }).unless({
-    path: [ 
-        /^\/api\//, 
-        /^\/pub\//,
-    ] 
-}))
+const jwt_decrypt = require('./js/jwt_decrypt')
+app.use(jwt_decrypt.decryptor)
+// unless : /^\/api\/|\/pub\//
 
 // 新增用户表名处理
 const usertables = require('./js/usertables')

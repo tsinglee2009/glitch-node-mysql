@@ -48,7 +48,8 @@ $(function() {
                 }
                 // 注册成功
                 else {
-                    gotoHomePage()
+                    // 自动登录
+                    login_inback()
                 }
             }
         })
@@ -57,5 +58,26 @@ $(function() {
     // 回到首页
     function gotoHomePage() {
         location.assign('./index.html')
+    }
+
+    // 注册成功后，自动登录
+    function login_inback() {
+        $.ajax({
+            type: 'post',
+            url: 'http://127.0.0.1/api/login',
+            data: $('#ev-form-signup').serialize(),
+            success: (res) => {
+                // 登录失败
+                if (res.status === 1) {
+                    alert(res.message)
+                }
+                // 登录成功
+                else {
+                    global_ev_token = res.token
+                    localStorage.setItem('token', res.token)
+                    gotoHomePage()
+                }
+            }
+        })
     }
 })

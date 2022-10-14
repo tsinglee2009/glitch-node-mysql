@@ -1,6 +1,19 @@
 const fs = require('fs')
 // 存储文件到本地
 
+// 文件上传后存储的位置
+const uploadFolder = './upfiles'
+
+function createFolder(folder) {
+    try {
+        fs.accessSync(folder)
+    } catch(e) {
+        fs.mkdirSync(folder)
+    }
+}
+
+createFolder(uploadFolder)
+
 exports.getArticleFilePath = (userid, article_id) => {
     return `upfiles/user${userid}_ariticle${article_id}`
 }

@@ -48,14 +48,14 @@ function check_to_create_table(data, callback) {
     throw new Error(e)
   }
 
-  const table_name = `${data.table_name}`
-  const sql_name = `${data.sql_name}`
+  const table_name = data.table_name
+  const sql_name = data.sql_name
 
   // 检索表
   connection.query(`SHOW TABLES LIKE '${table_name}'`, (err, res) => {
     if (err) return callback(err)
     // 表已存在，非第一次建表
-    if (res !== 1) return callback(null, 0)
+    if (res.length === 1) return callback(null, 0)
     // 表不存在，第一次创建表
     load_sql_content(sql_name, (sql) => {
       if (sql instanceof Error) return callback(sql)
@@ -66,7 +66,7 @@ function check_to_create_table(data, callback) {
       connection.query(sql, (err, res) => {
         if (err) return callback(err)
         // 重置表的id (应该可以建表时同步设置)
-        connection.query(`TRUNCATE TABLE ${table_name}`, (err, res) => {
+        connection.query(`ALTER TABLE ${table_name} AUTO_INCREMENT=1`, (err, res) => {
           if (err) return callback(err)
           // 第一次建表完成
           return callback(null, 1)
@@ -90,13 +90,14 @@ connection.connect((err) => {
     console.log('all db tables :')
     console.log(results)
 
-    check_to_create_table({ table_name: '', sql_name: '' }, () => {})
-
     // 初始化 用户表
     check_to_create_table({ table_name: TABLE_USERS, sql_name: TABLE_USERS }, (err, status) => {
       if (err) console.log(err)
       else if (status === 1) {
         // 第一次建表
+        console.log('> first create table : ' + TABLE_USERS)
+      } else {
+        
       }
     })
   })
