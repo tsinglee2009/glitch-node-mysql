@@ -16,7 +16,7 @@ $(function() {
 
         $.ajax({
             type: 'post',
-            url: 'http://127.0.0.1/api/login',
+            url: '/api/login',
             data: $('#ev-form-signin').serialize(),
             success: (res) => {
                 // 登录失败
@@ -39,7 +39,7 @@ $(function() {
 
         $.ajax({
             type: 'post',
-            url: 'http://127.0.0.1/api/regUser',
+            url: '/api/regUser',
             data: $('#ev-form-signup').serialize(),
             success: (res) => {
                 // 注册失败
@@ -64,7 +64,7 @@ $(function() {
     function login_inback() {
         $.ajax({
             type: 'post',
-            url: 'http://127.0.0.1/api/login',
+            url: '/api/login',
             data: $('#ev-form-signup').serialize(),
             success: (res) => {
                 // 登录失败

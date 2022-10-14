@@ -43,7 +43,7 @@ $(function () {
     if (global_ev_token) {
         $.ajax({
             type: 'get',
-            url: 'http://127.0.0.1/my/userinfo',
+            url: '/my/userinfo',
             headers: {
                 'Accept': 'application/json',
                 'Authorization': global_ev_token
