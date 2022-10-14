@@ -1,10 +1,11 @@
 $('.ev-ico-user').attr('src', '')//默认图标
+// 全局变量
+global_ev_token = localStorage.getItem('token')
 
 $(function () {
 
-    // 全局变量
     global_ev_token = localStorage.getItem('token')
-
+    
     global_ev_resize_exec = function (jqObj, offset = 0) {
 
         resize_item()

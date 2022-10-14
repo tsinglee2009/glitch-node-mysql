@@ -14,14 +14,17 @@ function get_single_file(req) {
 module.exports = (req, res) => {
     
     var file = get_single_file(req)
+    var file_path = file ? file.path : 'images/default_cover_img.png'
 
     // 检查封面图片的有效性
-    if (!file) {
-        return res.cc('发布新文章失败！封面图片不能为空！')
-    }
+    // if (!file) {
+    //     return res.cc('发布新文章失败！封面图片不能为空！')
+    // }
 
-    // 如果执行失败，删除文件
-    res.cc_pre_fn = () =>  fs.unlinkSync(file.path)
+    if (file) {
+        // 如果执行失败，删除文件
+        res.cc_pre_fn = () =>  fs.unlinkSync(file.path)
+    }
 
     // 检查文章分类
     const sql_check = `select * from ${req.USER_TABLE_CATES} where is_delete=0 and id=?`
@@ -35,7 +38,7 @@ module.exports = (req, res) => {
         // 附加uploads图片路径
         var new_article = {
             ...req.body,
-            cover_img: file.path,
+            cover_img: file_path,
             pub_date: new Date(),
             author_id: req.user.id,
         }
