@@ -3,6 +3,10 @@ const db = require('../../js/database')
 // 删除文章分类
 module.exports = (req, res) => {
 
+    if (req.params.id === 1) {
+        return res.cc('默认分类禁止删除！')
+    }
+
     // 删除文章分类至数据库
     const sql_update = `update ${req.USER_TABLE_CATES} set is_delete=1 where id=?`
     db.query(sql_update, req.params.id , (err, results) => {

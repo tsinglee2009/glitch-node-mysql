@@ -2,6 +2,10 @@ const db = require('../../js/database')
 
 // 根据id更新文章分类
 module.exports = (req, res) => {
+
+    if (req.body.id === 1) {
+        return res.cc('默认分类禁止修改！')
+    }
     
     const sql_check = `select * from ${req.USER_TABLE_CATES} where id<>? and (name=? or alias=?)`
     db.query(sql_check, [ req.body.id, req.body.name, req.body.alias ], (err, results) => {
