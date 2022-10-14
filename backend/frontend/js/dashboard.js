@@ -141,7 +141,6 @@ $(function() {
                     'Authorization': global_ev_token
                 },
                 success: (res) => {
-                    console.log(res)
                     if (res.status === 1) {
                         return cb(res.message)
                     } else {
@@ -328,7 +327,7 @@ $(function() {
                             else {
                                 tr.find('span:eq(0)').html(name)
                                 tr.find('span:eq(1)').html(alias)
-                                console.log(res)
+                                // console.log(res)
                             }
                         }
                     })
