@@ -6,7 +6,7 @@ $(function() {
     var articleCover = undefined
 
     // 编辑现有文章
-    var editor_article_cate_id
+    var editor_article_cate_id = -1
     var editor_article_id = sessionStorage.getItem('ev-edit-article-id') || -1
     // clear after read it
     sessionStorage.removeItem('ev-edit-article-id')
@@ -33,6 +33,10 @@ $(function() {
             }
         })
 
+    } 
+    else {
+        // 封面图片
+        $('.ev-modal-cover-img').attr('src', '../images/default_cover_img.png')
     }
 
     // 初始化编辑器内容
@@ -42,8 +46,7 @@ $(function() {
         // 内容
         ev_ckeditor.setData(data.content)
         // 封面图片
-        $('.ev-modal-cover-img').attr('src', data.cover_img)
-        $('.ev-modal-cover').addClass('ev-modal-img-picked')
+        $('.ev-modal-cover-img').attr('src', data.cover_img || '../images/default_cover_img.png')
         // 文章分类
         editor_article_cate_id = data.cate_id
     }
@@ -68,25 +71,42 @@ $(function() {
     })
 
     // 上传文件
-    $('#ev-btn-uploader').click((e) => {
+    $('#ev-modal-cover-img').click((e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        // 点击上传
         $('#ev-file-updater').click()
-        
-        // 将上传的图片显示到页面上
-        $(document).on("change", "#ev-file-updater", function () {
-            var fileObj = $('#ev-file-updater')[0];
-            var reader = new FileReader();
-            // 转换成功后的操作，img.src即为转换后的DataURL
-            reader.onload = function(e) {
-                if (reader.readyState === 2) { //加载完毕后赋值
-                    $('.ev-modal-cover-img').attr('src', e.target.result)
-                    // 切换为图片
-                    $('.ev-modal-cover').addClass('ev-modal-img-picked')
-                }
-            }
-            reader.readAsDataURL(fileObj.files[0]);
-            articleCover = fileObj.files[0]
+    })
+
+    // 文章封面上传事件
+    $('#ev-file-updater').change((e) => {
+        read_image_base64(e.target, (img, file) => {
+            $('.ev-modal-cover-img').attr("src", img)
+            articleCover = file
         })
     })
+
+    function read_image_base64(target, cb) {
+        // 判断浏览器是否支持filereader
+        if(typeof FileReader=='undifined') {
+            alert('抱歉，你的浏览器不支持 FileReader')
+            return cb(null)
+        }
+        // 判断获取的是否为图片文件
+        var file = target.files[0];
+        if(!/image\/\w+/.test(file.type)) {
+            alert("请确保文件为图像文件");
+            return cb(null)
+        }
+        // 读取图片内容
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e) => {
+            return cb(e.target.result, file)
+        }
+        // window.URL.createObjectURL
+        // var uploadedImageURL = window.URL.createObjectURL(file);
+    }
 
     // 分类按钮点击事件
     $('#ev-cates-container').click((e) => {
@@ -152,7 +172,7 @@ $(function() {
                     $('#ev-cates-container').html(htmlStr)
                     // init dropdown
                     var selectItem = null
-                    if (editor_article_cate_id != -1) {
+                    if (editor_article_cate_id !== -1) {
                         selectItem =$('#ev-cates-container').find(`[data-id=${editor_article_cate_id}]`)
                     }
                     if(!selectItem) {
@@ -175,8 +195,6 @@ $(function() {
         formData.append('content', articleContent)
         formData.append('state', pub ? '已发布' : '草稿')
         formData.append('cover_img', articleCover)
-
-        console.log(articleCover)
 
         var postUrl
 

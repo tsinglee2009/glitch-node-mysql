@@ -11,23 +11,70 @@ var connection = mysql.createConnection({
 });
 
 // db tables config
-const table_names = [ 'ev_users' /*, 'ev_article_cates', 'ev_articles'*/ ]
+const TABLE_USERS = 'ev_users'
+const TABLE_CATES = 'ev_article_cates'
+const TABLE_ARTICLES = 'ev_articles'
 // db default cate name & alias
 const CATE_DEFAULT = {
   name: "未命名",
   alias: 'default'
 }
-
-var tablesMap = new Map()
-table_names.forEach(item => {
+  
+// 加载sql文件内容
+function load_sql_content(table_name, callback) {
   var sql = ``
   try {
-    sql = fs.readFileSync(`./sql/${item}.sql`, { encoding: 'utf8' })
+    sql = fs.readFileSync(`./sql/${table_name}.sql`, { encoding: 'utf8' })
   } catch(e) {
-    throw e
+    return callback(e)
   }
-  tablesMap.set(item, sql)
-});
+  return callback(sql)
+}
+
+// 初始化表的公共方法
+// data 必须包含下面三个参数
+//  - sql_name : 建表的sql文件名
+//  - table_name : 将要创建的表名
+// callback(err, status) : status为1表示第一次建表
+function check_to_create_table(data, callback) {
+
+  // 异常处理
+  try
+  {
+    var t_table = data.table_name.length
+    var t_sql = data.sql_name.length
+    var t_cb = callback.__proto__
+  } catch(e) {
+    throw new Error(e)
+  }
+
+  const table_name = `${data.table_name}`
+  const sql_name = `${data.sql_name}`
+
+  // 检索表
+  connection.query(`SHOW TABLES LIKE '${table_name}'`, (err, res) => {
+    if (err) return callback(err)
+    // 表已存在，非第一次建表
+    if (res !== 1) return callback(null, 0)
+    // 表不存在，第一次创建表
+    load_sql_content(sql_name, (sql) => {
+      if (sql instanceof Error) return callback(sql)
+      // 表名替换
+      if (sql_name !== table_name)
+        sql = sql.replace(sql_name, table_name)
+      // 执行建表
+      connection.query(sql, (err, res) => {
+        if (err) return callback(err)
+        // 重置表的id (应该可以建表时同步设置)
+        connection.query(`TRUNCATE TABLE ${table_name}`, (err, res) => {
+          if (err) return callback(err)
+          // 第一次建表完成
+          return callback(null, 1)
+        })
+      })
+    })
+  })
+}
 
 // connect database
 connection.connect((err) => {
@@ -37,68 +84,49 @@ connection.connect((err) => {
   }
   console.log('db connected as id ' + connection.threadId);
 
-  // !!! TEST : clean tables
-  // table_names.forEach(item => connection.query(`DROP TABLE IF EXISTS ` + item))
-
   // show all db tables
   connection.query('SHOW TABLES', (err, results) => {
     if (err) return console.log(err)
     console.log('all db tables :')
     console.log(results)
 
-    // create tables
-    create_table_itr(tablesMap.entries())
+    check_to_create_table({ table_name: '', sql_name: '' }, () => {})
+
+    // 初始化 用户表
+    check_to_create_table({ table_name: TABLE_USERS, sql_name: TABLE_USERS }, (err, status) => {
+      if (err) console.log(err)
+      else if (status === 1) {
+        // 第一次建表
+      }
+    })
   })
 });
-
-// create table function
-function create_table_itr(itr) {
-
-  var item = itr.next().value
-
-  if (item) {
-    // console.log('- check table : ' + item[0])
-
-    connection.query(item[1], (err, results) => {
-        if (err) {
-          console.log('error when create table : ' + table)
-          return console.log(err)
-        }
-        //
-        create_table_itr(itr)
-    });
-  }
-}
 
 // 新加多用户功能
 // 注册成功后新建两张用户表 ev_user${userid}_cates 和 ev_user${userid}_articles
 connection.init_user_tables = (userid) => {
 
-  const TABLE_CATES = connection.get_user_cates_table_name(userid)
-  const TABLE_ARTICLES = connection.get_user_articles_table_name(userid)
+  const TABLE_USER_CATES = connection.get_user_cates_table_name(userid)
+  const TABLE_USER_ARTICLES = connection.get_user_articles_table_name(userid)
 
-  const sql_cates = load_sql('ev_article_cates').replace(`ev_article_cates`, TABLE_CATES)
-  connection.query(sql_cates)
-
-  const sql_arts = load_sql('ev_articles').replace(`ev_articles`, TABLE_ARTICLES)
-  connection.query(sql_arts)
-
-  // 插入默认文章分类数据
-  connection.query(`select name from ${TABLE_CATES} where name = "${CATE_DEFAULT.name}"`, (err, results) => {
-      if (!err && results.length !== 1)
-        connection.query(`insert into ${TABLE_CATES} (name, alias) values ("${CATE_DEFAULT.name}", "${CATE_DEFAULT.alias}")`)
-  })
-  
-  function load_sql(table_name) {
-    var sql = ``
-    try {
-      sql = fs.readFileSync(`./sql/${table_name}.sql`, { encoding: 'utf8' })
-    } catch(e) {
-      throw e
+  // 初始化 文章分类表
+  check_to_create_table({ table_name: TABLE_USER_CATES, sql_name: TABLE_CATES }, (err, status) => {
+    if (err) console.log(err)
+    else if (status === 1) {
+      // 第一次建表，添加默认分类
+      connection.query(`insert into ${TABLE_USER_CATES} (name, alias) values ("${CATE_DEFAULT.name}", "${CATE_DEFAULT.alias}")`)
     }
-    return sql
-  }
+  })
+
+  // 初始化 文章表
+  check_to_create_table({ table_name: TABLE_USER_ARTICLES, sql_name: TABLE_ARTICLES }, (err, status) => {
+    if (err) console.log(err)
+    else if (status === 1) {
+      // 第一次建表
+    }
+  })
 }
+
 // 获取用户文章分类表名
 connection.get_user_cates_table_name = (userid) => { return `ev_user${userid}_cates` }
 // 获取用户文章表名

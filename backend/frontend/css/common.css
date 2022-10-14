@@ -68,6 +68,8 @@ ul {
   height: 30px;
   vertical-align: middle;
   line-height: 54px;
+  border-radius: 50%;
+  background-color: #fff;
 }
 .ev-com-navbar .navbar-right.ev-mode-user .dropdown-menu {
   left: -100% !important;

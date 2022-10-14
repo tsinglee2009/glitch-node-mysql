@@ -27,7 +27,7 @@ module.exports.pwd_schema = {
 
 // 更新头像
 module.exports.avatar_schema = {
-    body : {
-        avatar,
-    }
+    // body : {
+    //     avatar,
+    // }
 }

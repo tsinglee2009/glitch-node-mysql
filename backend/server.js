@@ -26,11 +26,11 @@ app.use((req, res, next) => {
 })
 
 // 中间件：解析表单数据 : x-www-form-urlencoded
-app.use(express.urlencoded({ extended : false }))
+app.use(express.urlencoded({ extended : false, limit: '2mb' }))
 
 // 中间件：解析表单数据校验 : multipart/form-data
 const uploader = require('./js/uploader')
-app.use(uploader.single('cover_img'))
+app.use(uploader.any())
 
 // 中间件：解析token 身份认证
 var expressjwt = require("express-jwt")

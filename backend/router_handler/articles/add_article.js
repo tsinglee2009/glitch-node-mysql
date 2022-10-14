@@ -2,16 +2,26 @@ const db = require('../../js/database')
 const upfiler = require('../../js/upfiler')
 const fs = require('fs')
 
+// 只保留一个文件
+function get_single_file(req) {
+    if (req.files.length === 0) return null
+    for (var i = 1; i < req.files.length; i++)
+        fs.unlinkSync(req.files[i].path)
+    return req.files[0]
+}
+
 // 文章管理 - 发布新文章
 module.exports = (req, res) => {
     
+    var file = get_single_file(req)
+
     // 检查封面图片的有效性
-    if (!req.file) {
+    if (!file) {
         return res.cc('发布新文章失败！封面图片不能为空！')
     }
 
     // 如果执行失败，删除文件
-    res.cc_pre_fn = () =>  fs.unlinkSync(req.file.path)
+    res.cc_pre_fn = () =>  fs.unlinkSync(file.path)
 
     // 检查文章分类
     const sql_check = `select * from ${req.USER_TABLE_CATES} where is_delete=0 and id=?`
@@ -25,7 +35,7 @@ module.exports = (req, res) => {
         // 附加uploads图片路径
         var new_article = {
             ...req.body,
-            cover_img: req.file.path,
+            cover_img: file.path,
             pub_date: new Date(),
             author_id: req.user.id,
         }

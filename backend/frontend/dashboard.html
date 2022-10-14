@@ -165,15 +165,25 @@
                     </div>
                     <div id="ev-field-avatar" class="ev-field ev-field-avatar">
                         <div class="ev-title">更换头像</div>
-                        <div class="ev-avatar">
-                            <!-- 图片裁剪框 start -->
-                            <div class="ev-avatar-container">
-                                <img id="ev-avatar-image" src="./images/logo.png">
+                        <div class="ev-avatar-layout">
+                            <div class="ev-avatar">
+                                <!-- 图片裁剪框 start -->
+                                <div class="ev-avatar-container">
+                                    <img id="ev-avatar-image" src="./images/logo.png">
+                                </div>
+                                <!-- 图片裁剪框 end -->
+                                <input id="ev-btn-avatar-uploader" class="ev-avartar-file" type="file">
                             </div>
-                            <!-- 图片裁剪框 end -->
-                            <input class="ev-avartar-file" type="file">
+                            <div class="ev-avatar-preview">
+                                <div class="ev-avatar-preview-holder ev-circle">
+                                    <div class="ev-avatar-circle"></div>
+                                </div>
+                                <div class="ev-avatar-preview-holder">
+                                    <div class="ev-avatar-rectangle"></div>
+                                </div>
+                                <button id="ev-btn-avatar-confirm" class="btn btn-default ev-button">确 定</button>
+                            </div>
                         </div>
-                        <button class="btn btn-default ev-button">确定</button>
                     </div>
                     <div id="ev-field-password" class="ev-field ev-field-password">
                         <div class="ev-title">重置密码</div>

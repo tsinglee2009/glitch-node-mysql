@@ -73,7 +73,131 @@ $(function() {
 
     // 2. 修改头像
     function onload_avatar() {
-        alert('头像修改 todo ...')
+
+        var avatar_cropper = $('#ev-avatar-image');
+        // 初始化头像裁剪区域
+        get_user_pic((pic) => update_avatar_cropper(pic))
+
+        $('#ev-btn-avatar-uploader').change((e) => {
+            // 上传按钮选择完成
+            read_image_base64(e.target, (str) => {
+                if (null !== str) {
+                    update_avatar_cropper(str)
+                }
+            })
+        })
+
+        $('#ev-btn-avatar-confirm').click((e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            // get result
+            var imgData = avatar_cropper.cropper("getCroppedCanvas").toDataURL();
+            // console.log(imgData)
+            update_avatar(imgData, (msg) => {
+                if (msg) alert(msg)
+                else {
+                    // 更新头像显示
+                    $('.ev-ico-user').attr('src', imgData)
+                }
+            })
+        })
+
+        function update_avatar_cropper(pic) {
+
+            avatar_cropper.cropper('destroy')
+                          .attr('src', pic || './images/default_avatar.png')
+                          .css('max-width', '100%')
+
+            avatar_cropper.cropper({
+                aspectRatio: 1,
+                preview: '.ev-avatar-rectangle,.ev-avatar-circle',
+                crop: function(event) {
+                    // console.log(event.detail.x);
+                    // console.log(event.detail.y);
+                    // console.log(event.detail.width);
+                    // console.log(event.detail.height);
+                    // console.log(event.detail.rotate);
+                    // console.log(event.detail.scaleX);
+                    // console.log(event.detail.scaleY);
+                }
+            });
+        }
+
+        function update_avatar(imgData, cb) {
+
+            var formData = new FormData()
+            var imgFile = convert_base64_to_file(imgData)
+            formData.append('avatar', imgFile)
+            
+            $.ajax({
+                type: 'post',
+                url: '/my/update/avatar',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': global_ev_token
+                },
+                success: (res) => {
+                    console.log(res)
+                    if (res.status === 1) {
+                        return cb(res.message)
+                    } else {
+                        return cb(null)                        
+                    }
+                }
+            })
+        }
+        
+        function get_user_pic(cb) {
+            $.ajax({
+                type: 'get',
+                url: '/my/userinfo',
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': global_ev_token
+                },
+                success: (res) => {
+                    if (res.status === 1) {
+                        alert(res.message)
+                        cb(null)
+                    } else {
+                        cb(res.data.user_pic)
+                    }
+                }
+            })
+        }
+
+        function read_image_base64(target, cb) {
+            // 判断浏览器是否支持filereader
+            if(typeof FileReader=='undifined') {
+                alert('抱歉，你的浏览器不支持 FileReader')
+                return cb(null)
+            }
+            // 判断获取的是否为图片文件
+            var file = target.files[0];
+            if(!/image\/\w+/.test(file.type)) {
+                alert("请确保文件为图像文件");
+                return cb(null)
+            }
+            // 读取图片内容
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (e) => {
+                return cb(e.target.result)
+            }
+            // window.URL.createObjectURL
+            // var uploadedImageURL = window.URL.createObjectURL(file);
+        }
+
+        function convert_base64_to_file(imgData) {
+            var arr = imgData.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+            while (n--) u8arr[n] = bstr.charCodeAt(n);
+            return new File([u8arr], 'user_avatar.png', {type: 'image/jpeg'});
+        }
     }
 
     // 3. 修改密码

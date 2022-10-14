@@ -1,3 +1,5 @@
+$('.ev-ico-user').attr('src', '')//默认图标
+
 $(function () {
 
     // 全局变量
@@ -86,5 +88,29 @@ $(function () {
             var clientHeight = (document.body.clientHeight > document.documentElement.clientHeight) ? document.body.clientHeight : document.documentElement.clientHeight;
         }
         return clientHeight;
+    }
+    
+    // 获取用户头像
+    get_user_pic((pic) => {
+        $('.ev-ico-user').attr('src', pic || './images/default_avatar.png')
+    })
+
+    function get_user_pic(cb) {
+        $.ajax({
+            type: 'get',
+            url: '/my/userinfo',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': global_ev_token
+            },
+            success: (res) => {
+                if (res.status === 1) {
+                    alert(res.message)
+                    cb(null)
+                } else {
+                    cb(res.data.user_pic)
+                }
+            }
+        })
     }
 })

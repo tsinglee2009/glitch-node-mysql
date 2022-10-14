@@ -68,36 +68,30 @@
   border-radius: 6px;
 }
 .ev-modal-field .ev-submit-article-field .ev-modal-cover {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px;
-  border: 1px dashed #e5e5e5;
+  position: relative;
+  height: 160px;
+  padding: 2px;
+  border: 1px solid #e5e5e5;
   border-radius: 6px;
-}
-.ev-modal-field .ev-submit-article-field .ev-modal-cover .ev-modal-cover-img {
-  display: none;
-  max-height: 160px;
-  max-width: 80%;
-}
-.ev-modal-field .ev-submit-article-field .ev-modal-cover .ev-modal-cover-picker {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 64px;
-  color: #e5e5e5;
+  text-align: center;
   cursor: pointer;
 }
-.ev-modal-field .ev-submit-article-field .ev-modal-cover .ev-modal-cover-picker:hover {
-  color: #ccc;
+.ev-modal-field .ev-submit-article-field .ev-modal-cover .ev-modal-cover-img {
+  max-height: 100%;
+  max-width: 100%;
 }
-.ev-modal-field .ev-submit-article-field .ev-modal-cover.ev-modal-img-picked {
-  border-style: solid;
+.ev-modal-field .ev-submit-article-field .ev-modal-cover .ev-modal-cover-hover {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 14px;
+  color: #999;
+  outline-width: 2px;
+  outline-color: #333;
+  outline-offset: 2px;
 }
-.ev-modal-field .ev-submit-article-field .ev-modal-cover.ev-modal-img-picked .ev-modal-cover-picker {
-  display: none;
-}
-.ev-modal-field .ev-submit-article-field .ev-modal-cover.ev-modal-img-picked .ev-modal-cover-img {
-  display: inline-block;
+.ev-modal-field .ev-submit-article-field .ev-modal-cover:hover .ev-modal-cover-hover {
+  color: #2da44e;
 }
 .ev-modal-field .ev-submit-article-field .ev-modal-cates {
   margin-left: 10px;
