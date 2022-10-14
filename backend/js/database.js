@@ -16,7 +16,7 @@ const TABLE_CATES = 'ev_article_cates'
 const TABLE_ARTICLES = 'ev_articles'
 // db default cate name & alias
 const CATE_DEFAULT = {
-  name: "未命名",
+  name: "未分类",
   alias: 'default'
 }
   
